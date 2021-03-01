@@ -29,7 +29,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, reactive, getCurrentInstance, isReactive, ref, isRef, createVNode, watch} from 'vue'
+import {defineComponent, reactive, getCurrentInstance, isReactive, ref, isRef, createVNode, PropType} from 'vue'
 import {Form, Spin} from 'ant-design-vue'
 import {useForm} from "@ant-design-vue/use";
 import {isString, isFunction, isAsyncFunction} from '@/utils/is'
@@ -47,8 +47,8 @@ export default defineComponent({
   props: {
     formSchema: { // 动态验证表单
       required: true,
-      type: [Object]
-    } as any,
+      type: Object as PropType<FormSchema>
+    },
     fields: { // 预置字段默认值
       type: Object,
       default: () => ({})

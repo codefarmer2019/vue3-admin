@@ -12,11 +12,12 @@ import {RouteRecordRaw} from "vue-router";
  * 异步生成菜单树， 方案二
  * @param dataList
  */
-const list2tree = (items, parentId = -1, arr = []) => {
+const list2tree = (items, parentId = -1, arr = [], pathPrefix = '') => {
     return items.filter(item => item.parentId == parentId).map((item: any) => {
         const {icon, id, name, parentId, sort, keepAlive, meta, url} = item
-
-        const path = url.startsWith('/') ? url : '/' + url
+        let path = url.startsWith('/') ? url : '/' + url
+        path = url.startsWith(pathPrefix) ? path : pathPrefix + path
+        path = [...new Set(path.split('/'))].join('/')
 
         // 路由对应的组件
         const component = (constantRouterComponents[path]) || Empty || (() => import('@/views/shared/error/404.vue'))
@@ -25,7 +26,7 @@ const list2tree = (items, parentId = -1, arr = []) => {
             path: path,
             // 路由名称，建议唯一
             name: path || '',
-            children: list2tree(items, item.id, []),
+            children: list2tree(items, item.id, [], path),
             // 该路由对应页面的 组件 (动态加载)
             component: component,
             props: true,

@@ -56,7 +56,7 @@ export default defineComponent({
         content: '您确定要删除所有选中吗？',
         onOk: async () => {
           await delAdminAccess(state.rowSelection.selectedRowKeys.toString())
-          tableRef.value.refreshTableData()
+          await tableRef.value.refreshTableData()
           state.rowSelection.selectedRowKeys = []
         }
       })
@@ -77,14 +77,16 @@ export default defineComponent({
     const expand = async (expanded, record) => {
       const expandItemEl = state.itemRefs[record.id]
       // 点击展开图标loading
-      const {data} = await useExpandLoading({
+      const result = await useExpandLoading({
         expanded,
         record,
         expandItemEl,
         asyncFunc: getAdminAccess,
         params: {id: record.id, limit: 100}
       })
-      record.children = data
+      if (result?.data) {
+        record.children = result.data
+      }
     }
 
     return {

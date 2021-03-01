@@ -33,7 +33,7 @@ export default defineComponent({
   name: "rule-form",
   components: { [Alert.name]: Alert, [Card.name]: Card, AButton, SchemaForm},
   setup() {
-    const dynamicForm = ref<any>(null)
+    const dynamicForm = ref()
 
     // 点击提交
     const confirm = () => dynamicForm.value.validate()

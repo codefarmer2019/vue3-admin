@@ -29,7 +29,8 @@ const plugins = debug ? [createLogger({
     filter(mutation, stateBefore, stateAfter) {
         // 若 mutation 需要被记录，就让它返回 true 即可
         // 顺便，`mutation` 是个 { type, payload } 对象
-        return mutation.type !== LockscreenMutationType.SetLockTime
+        const notNeedDebugs: string[] = [LockscreenMutationType.SetLockTime, LockscreenMutationType.SetLock]
+        return !notNeedDebugs.includes(mutation.type)
     }
 })] : [];
 // 可以根据自己需要添加其他插件，例如：vuex持久化插件
