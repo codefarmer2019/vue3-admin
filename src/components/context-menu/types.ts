@@ -7,7 +7,7 @@ export interface ContextMenuItem {
     label: string;
     icon?: string;
     disabled?: boolean;
-    handler?: (...arg:any) => any;
+    handler?: (...arg: any) => any;
     divider?: boolean;
     children?: ContextMenuItem[];
 }

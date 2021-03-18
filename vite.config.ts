@@ -1,8 +1,9 @@
-import type { UserConfig, ConfigEnv } from 'vite'
-import { loadEnv } from 'vite'
+import type {UserConfig, ConfigEnv} from 'vite'
+import {loadEnv} from 'vite'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import vue from '@vitejs/plugin-vue'
-import { resolve } from 'path'
+import {resolve} from 'path'
+import styleImport from 'vite-plugin-style-import';
 
 const CWD = process.cwd()
 
@@ -11,9 +12,9 @@ const BASE_ENV_CONFIG = loadEnv('', CWD)
 const DEV_ENV_CONFIG = loadEnv('development', CWD)
 const PROD_ENV_CONFIG = loadEnv('production', CWD)
 
-export default ({ command, mode }: ConfigEnv): UserConfig => {
+export default ({command, mode}: ConfigEnv): UserConfig => {
     // 环境变量
-    const {VITE_BASE_URL,VITE_DROP_CONSOLE} = loadEnv(mode, CWD)
+    const {VITE_BASE_URL, VITE_DROP_CONSOLE} = loadEnv(mode, CWD)
 
     // const isBuild = command === 'build';
 
@@ -22,14 +23,30 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
         esbuild: {
             // target: 'es2015'
         },
-        alias: {
-            '@': resolve(__dirname, './src'),
+        resolve: {
+            alias: [
+                {
+                    find: '@',
+                    replacement: resolve(__dirname, './src')
+                },
+            ],
         },
         plugins: [
             vue(),
             vueJsx({
                 // options are passed on to @vue/babel-plugin-jsx
             }),
+            styleImport({
+                libs: [
+                    {
+                        libraryName: 'ant-design-vue',
+                        esModule: true,
+                        resolveStyle: (name) => {
+                            return `ant-design-vue/es/${name}/style/index`;
+                        },
+                    },
+                ]
+            })
         ],
         css: {
             preprocessorOptions: {
@@ -43,7 +60,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
             }
         },
         server: {
-            port: 8888,
+            port: 8080,
             proxy: {
                 '/api': {
                     target: 'http://29135jo738.zicp.vip',

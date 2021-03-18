@@ -40,7 +40,7 @@
       <a-form-item label="排序">
         <a-input-number v-model:value="modelRef.sort" :min="1" placeholder="排序"/>
       </a-form-item>
-      <a-form-item label="keepAlive" name="type">
+      <a-form-item label="keepAlive" name="keepAlive">
         <a-select v-model:value="modelRef.keepAlive" placeholder="是否缓存页面">
           <a-select-option :value="0">
             否

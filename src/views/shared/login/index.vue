@@ -5,7 +5,7 @@
 <!--      <img src="~@/assets/images/logo.png" alt="">-->
       <h1>Antd Admin</h1>
     </div>
-    <a-form layout="horizontal" :model="formInline" @submit="handleSubmit" @submit.prevent>
+    <a-form layout="horizontal" :model="formInline" @submit="handleSubmit">
       <a-form-item>
         <a-input v-model:value="formInline.username" size="large" placeholder="admin">
           <template v-slot:prefix><user-outlined type="user"/></template>

@@ -10,7 +10,7 @@
 > 所以如果进入页面时提示网络错误，则需要再次刷新页面请求接口
 
 > 使用了Vue3.0全家桶、ant-design-vue2.0和typescript4.0，实践vue3.0的新特性以及玩法，不得不说vue3.0的Composition API相比于vue2.0的Options API
-> 灵活很多，让我们可以灵活地组合组件逻辑，我们可以很轻松的使用hooks的形式去代替以前mixins等的写法。
+> 灵活很多，让我们可以灵活地组合组件逻辑，我们可以很轻松的使用hooks的形式去代替以前mixins等的写法。更多hooks可以参考[vueuse](https://vueuse.org/functions.html)
 
 ### 功能、组件的封装
 - [x] 动态表格（扩展了伸缩列功能，以及使用JSON schema配置生成表格） // TODO 后续有待加强及完善

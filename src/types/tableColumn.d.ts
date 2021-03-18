@@ -8,7 +8,7 @@ export declare interface ActionOptions {
         effect?: 'disabled';
     };
     props?: any; // 组件属性，v-bind="props"
-    func?: ({text, record, index}, callback) => any; // 动作事件触发回调
+    func?: ({text, record, index}, callback: (...rest) => any) => any; // 动作事件触发回调
 }
 
 export declare interface TableColumn extends ColumnProps {
