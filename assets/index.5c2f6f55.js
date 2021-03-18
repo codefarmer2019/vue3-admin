@@ -1,0 +1,1 @@
+var e=Object.assign;import{c as a,bK as t}from"./index.10b41d6e.js";import{a as r}from"./dynamic-table.c88aea83.js";const n=n=>{let o;const s=document.createElement("div");return o=a(r,e(e({},n),{remove:()=>{o=null,t(null,s),s.remove()}})),t(o,s),o};export{n as u};
