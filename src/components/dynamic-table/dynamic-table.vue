@@ -7,8 +7,9 @@
       size="middle"
       :data-source="data"
       :pagination="pageOption"
-      @change="paginationChange"
       bordered
+      :customRow="customRow"
+      @change="paginationChange"
       v-bind="{...$props, ...$attrs}"
   >
     <!--  自定义slots start-->
@@ -95,25 +96,11 @@
 
 <script lang="ts">
 import {defineComponent, reactive, PropType, toRefs} from 'vue'
-import {Card, Select, Table, Popconfirm} from 'ant-design-vue'
-import {ColumnProps, TableProps} from 'ant-design-vue/lib/table/interface'
-import {PaginationProps} from 'ant-design-vue/lib/pagination/Pagination'
+import {Card, Select, Table, Popconfirm, message} from 'ant-design-vue'
+import {TableProps} from 'ant-design-vue/lib/table/interface'
 import {usePages} from "@/hooks";
-import useDragCol from './utils/useDragCol'
-
-interface Columns extends ColumnProps{
-  actions?: any;
-  dataIndex: string;
-}
-
-type pageOption = Partial<typeof PaginationProps>
-
-interface Props extends Omit<TableProps, 'columns'>{
-  columns: Columns[];
-  rowKey: string | ((record: any) => string);
-  pageOption: pageOption;
-  getListFunc: (prams) => any;
-}
+import {useDraggable, useDragCol} from './hooks'
+import {Columns, pageOption, Props} from './types'
 
 export default defineComponent({
   name: 'dynamic-table',
@@ -150,6 +137,7 @@ export default defineComponent({
 
     const state = reactive({
       expandItemRefs: {},
+      customRow: () => ({}) as TableProps["customRow"],
       data: [], // 表格数据
       pageOption: Object.assign(pageOption, props.pageOption), // 表格分页
       actions: props.columns.find(item => (item.dataIndex || item.key) == 'action')?.actions || [], // 表格操作（如：编辑、删除的按钮等）
@@ -168,6 +156,7 @@ export default defineComponent({
       const {data, pageNumber, pageSize, total} = await props.getListFunc(params).finally(() => state.loading = false)
       Object.assign(state.pageOption, {current: ~~pageNumber, pageSize: ~~pageSize, total: ~~total})
       state.data = data
+      state.customRow = useDraggable<any>(state.data)!;
     }
 
     refreshTableData()

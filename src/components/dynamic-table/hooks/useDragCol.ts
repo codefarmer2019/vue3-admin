@@ -1,8 +1,8 @@
 /**
- * 使用表格列拖拽
+ * 使用表格列伸缩列
  * @param columns
  */
-export default (columnsProp) => {
+export const useDragCol = (columnsProp) => {
     // self: 用来存储当前更改宽度的Table Cell,避免快速移动鼠标的问题
     let self,tableX,table,headerCell
 

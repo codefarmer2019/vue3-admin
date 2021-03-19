@@ -60,7 +60,7 @@ export default ({command, mode}: ConfigEnv): UserConfig => {
             }
         },
         server: {
-            port: 8080,
+            port: 8088,
             proxy: {
                 '/api': {
                     target: 'http://29135jo738.zicp.vip',

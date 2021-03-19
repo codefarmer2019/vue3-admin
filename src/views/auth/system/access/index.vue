@@ -24,7 +24,7 @@ import {DynamicTable} from '@/components/dynamic-table'
 import {delAdminAccess, getAdminAccess} from '@/api/system/access'
 import AddModal from './add-modal.vue'
 import {columns} from "./columns";
-import useExpandLoading from '@/components/dynamic-table/utils/useExpandLoading'
+import {useExpandLoading} from '@/components/dynamic-table/hooks'
 import {useCreateModal} from "@/hooks";
 
 
