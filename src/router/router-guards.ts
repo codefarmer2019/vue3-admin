@@ -4,6 +4,7 @@ import NProgress from 'nprogress' // progress bar
 import {ACCESS_TOKEN} from '@/store/mutation-types'
 import {storage} from '@/utils/Storage'
 import {AsyncRouteActionTypes} from '@/store/modules/async-route/actions'
+import {MutationType} from '@/store/modules/async-route/mutations'
 import {debounce} from '@/utils/lodashChunk'
 
 NProgress.configure({showSpinner: false}) // NProgress Configuration
@@ -45,7 +46,7 @@ export function createRouterGuards(router: Router) {
             } else {
                 const hasRoute = router.hasRoute(to.name!)
                 // 如果不需要每次切换路由获取最新的动态路由，可把下面注释放开
-                // if (store.getters.addRouters.length === 0) {
+                // if (store.getters.menus.length === 0) {
                 // generate dynamic router
                 // 防抖获取菜单
                 isGetMenus({to, from, next, hasRoute})
@@ -71,9 +72,22 @@ export function createRouterGuards(router: Router) {
     })
 
     router.afterEach((to, from, failure) => {
+        document.title = to?.meta?.title as string || document.title
         if (isNavigationFailure(failure)) {
             console.log('failed navigation', failure)
         }
+        // 在这里设置需要缓存的组件名称
+        const keepAliveComponents = store.state.asyncRoute.keepAliveComponents
+        const currentComName = to.matched.find(item => item.name == to.name)?.components?.default.name;
+        if (currentComName && !keepAliveComponents.includes(currentComName) && to.meta?.keepAlive) { // 需要缓存的组件
+            keepAliveComponents.push(currentComName);
+        } else if (!to.meta?.keepAlive || to.name == "Redirect") { // 不需要缓存的组件
+            const index = store.state.asyncRoute.keepAliveComponents.findIndex(name => name == currentComName);
+            if (index != -1) {
+                keepAliveComponents.splice(index, 1);
+            }
+        }
+        store.commit(MutationType.SetKeepAliveComponents, keepAliveComponents)
         NProgress.done() // finish progress bar
     })
 

@@ -4,7 +4,6 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import vue from '@vitejs/plugin-vue'
 import {resolve} from 'path'
 import styleImport from 'vite-plugin-style-import';
-
 const CWD = process.cwd()
 
 // 环境变量

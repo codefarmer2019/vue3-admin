@@ -7,12 +7,12 @@
 <script lang="ts">
 import {defineComponent, computed} from 'vue'
 
-const components = import.meta.globEager('../../assets/icons/*.svg')
-const modules = {}
-Object.keys(components).forEach(path => {
-  const fileName = path.replace(/(.*\/)*([^.]+).*/ig,"$2")
-  modules[fileName] = components[path].default
-})
+// const components = import.meta.globEager('../../assets/icons/*.svg')
+// const modules = {}
+// Object.keys(components).forEach(path => {
+//   const fileName = path.replace(/(.*\/)*([^.]+).*/ig,"$2")
+//   modules[fileName] = components[path].default
+// })
 
 interface SvgIcon {
   iconClass: string;

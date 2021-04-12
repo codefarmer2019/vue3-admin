@@ -1,8 +1,8 @@
 <template>
   <div class="login-box">
     <div class="login-logo">
-      <svg-icon icon-class="logo" />
-<!--      <img src="~@/assets/images/logo.png" alt="">-->
+<!--      <svg-icon name="logo" />-->
+      <img src="~@/assets/images/logo.png" alt="">
       <h1>Antd Admin</h1>
     </div>
     <a-form layout="horizontal" :model="formInline" @submit="handleSubmit">
