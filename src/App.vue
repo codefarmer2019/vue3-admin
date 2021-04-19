@@ -16,7 +16,6 @@ import {ConfigProvider} from 'ant-design-vue'
 import {LockScreen} from '@/components/lockscreen'
 import {useStore} from '@/store'
 import {useRoute} from "vue-router";
-import {LockscreenMutationType} from '@/store/modules/lockscreen/mutations'
 
 export default defineComponent({
   name: 'App',
@@ -34,15 +33,15 @@ export default defineComponent({
       clearInterval(timer)
       if (route.name == 'login' || isLock.value) return
       // 设置不锁屏
-      store.commit(LockscreenMutationType.SetLock, false)
+      store.commit('lockscreen/setLock', false)
       // 重置锁屏时间
-      store.commit(LockscreenMutationType.SetLockTime)
+      store.commit('lockscreen/setLockTime')
       timer = setInterval(() => {
         // 锁屏倒计时递减
-        store.commit(LockscreenMutationType.SetLockTime, lockTime.value - 1)
+        store.commit('lockscreen/setLockTime', lockTime.value - 1)
         if (lockTime.value <= 0) {
           // 设置锁屏
-          store.commit(LockscreenMutationType.SetLock, true)
+          store.commit('lockscreen/setLock', true)
           return clearInterval(timer)
         }
         // console.log(lockTime.value, '锁屏倒计时')

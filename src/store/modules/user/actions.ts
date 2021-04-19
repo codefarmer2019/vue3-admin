@@ -1,47 +1,27 @@
-import { ActionContext, ActionTree } from 'vuex'
-import { Mutations, MutationType } from './mutations'
-import { State } from './state'
-import {RootState} from "@/store";
+import { ActionContext } from 'vuex'
+import {IUserState} from './state'
 import {getUserInfo, login} from "@/api/system/user";
 import {ACCESS_TOKEN, CURRENT_USER, IS_LOCKSCREEN} from "@/store/mutation-types";
 import {storage} from "@/utils/Storage";
-import {LockscreenMutationType} from '@/store/modules/lockscreen/mutations'
 import store from "@/store";
+import {IStore} from '@/store/types'
 
-export enum UserActionTypes {
-    Login = 'LOGIN',
-    GetInfo = 'GET_INFO',
-    Logout = 'LOGOUT',
-}
-
-type ActionAugments = Omit<ActionContext<State, RootState>, 'commit'> & {
-    commit<K extends keyof Mutations>(
-        key: K,
-        payload: Parameters<Mutations[K]>[1]
-    ): ReturnType<Mutations[K]>;
-}
-
-export type Actions = {
-    [UserActionTypes.Login](context: ActionAugments, userInfo: any): Promise<any>;
-    [UserActionTypes.GetInfo](context: ActionAugments): Promise<any>;
-    [UserActionTypes.Logout](context: ActionAugments): Promise<any>;
-}
-
-export const actions: ActionTree<State, RootState> & Actions = {
+export const actions = {
     // 登录
-    async [UserActionTypes.Login]({commit}, userInfo) {
+    async login({commit}: ActionContext<IUserState, IStore>, userInfo) {
         try {
             const response = await login(userInfo)
             const {result, code, message} = response
             if (code == 0) {
                 console.log(result.token)
-                storage.set(ACCESS_TOKEN, result.token, 7 * 24 * 60 * 60 * 1000)
-                storage.set(CURRENT_USER, result, 7 * 24 * 60 * 60 * 1000)
+                const ex = 7 * 24 * 60 * 60 * 1000
+                storage.set(ACCESS_TOKEN, result.token, ex)
+                storage.set(CURRENT_USER, result, ex)
                 storage.set(IS_LOCKSCREEN, false)
-                commit(MutationType.SetToken, result.token)
+                commit('setToken', result.token)
                 // todo
-                commit(MutationType.SetInfo, result)
-                store.commit(LockscreenMutationType.SetLock, false)
+                commit('setUserInfo', result)
+                store.commit('lockscreen/setLock', false)
             }
             return Promise.resolve(response)
         } catch (e) {
@@ -50,7 +30,7 @@ export const actions: ActionTree<State, RootState> & Actions = {
     },
 
     // 获取用户信息
-    [UserActionTypes.GetInfo]({commit}) {
+    getUserInfo({commit}: ActionContext<IUserState, IStore>) {
         return new Promise((resolve, reject) => {
             getUserInfo().then(response => {
                 const result = response.result
@@ -69,14 +49,14 @@ export const actions: ActionTree<State, RootState> & Actions = {
                     role.permissionList = role.permissions.map(permission => {
                         return permission.permissionId
                     })
-                    commit(MutationType.SetRoles, result.role)
-                    commit(MutationType.SetInfo, result)
+                    commit('setRoles', result.role)
+                    commit('setUserInfo', result)
                 } else {
                     reject(new Error('getInfo: roles must be a non-null array !'))
                 }
 
                 // commit('SET_NAME', { name: result.name, welcome: welcome() })
-                commit(MutationType.SetAvatar, result.avatar)
+                commit('setAvatar', result.avatar)
 
                 resolve(response)
             }).catch(error => {
@@ -86,9 +66,9 @@ export const actions: ActionTree<State, RootState> & Actions = {
     },
 
     // 登出
-    async [UserActionTypes.Logout]({commit, state}) {
-            commit(MutationType.SetRoles, [])
-            commit(MutationType.SetInfo, '')
+    async logout({commit}: ActionContext<IUserState, IStore>) {
+            commit('setRoles', [])
+            commit('setUserInfo', '')
             storage.remove(ACCESS_TOKEN)
             storage.remove(CURRENT_USER)
             return Promise.resolve('')

@@ -8,7 +8,7 @@
       @click="clickMenuItem"
   >
     <template v-for="item in menus" :key="item.name">
-      <menu-item :menu-info="item"/>
+      <menu-item :menu-info="item" />
     </template>
   </a-menu>
 </template>
@@ -31,6 +31,7 @@ import {useStore} from '@/store'
 import {routes} from "@/router";
 
 export default defineComponent({
+  name: 'Menu',
   components: {
     MenuItem,
     'a-sub-menu': Menu.SubMenu,
@@ -62,7 +63,7 @@ export default defineComponent({
       selectedKeys: [currentRoute.name]
     })
 
-    const menus = computed(() => store.getters.menus.length > 0 ? store.getters.menus : routes.find(item => item.name == 'Layout')!.children)
+    const menus = computed(() => store.getters["asyncRoute/menus"] ?? routes.find(item => item.name == 'Layout')!.children)
 
     // 监听菜单收缩状态
     watch(() => props.collapsed, (newVal) => {
@@ -79,7 +80,6 @@ export default defineComponent({
 
     // 点击菜单
     const clickMenuItem = ({item, key, keyPath}) => {
-      console.log(router.getRoutes(), ';currentRoute')
       router.push({name: key})
     }
 

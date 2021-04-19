@@ -1,26 +1,26 @@
 <template>
-  <div @keyup="unLockLogin(true)" @mousedown.stop @contextmenu.prevent :class="{unLockLogin: isShowLogin}"
-       class="lockscreen">
+  <div :class="{unLockLogin: isShowLogin}" class="lockscreen" @keyup="unLockLogin(true)" @mousedown.stop
+       @contextmenu.prevent>
     <template v-if="!isShowLogin">
       <div class="lock-box">
         <div class="lock">
-          <span @click="unLockLogin(true)" class="lock-icon" title="解锁屏幕">
-            <lock-outlined/>
-            <unlock-outlined/>
+          <span class="lock-icon" title="解锁屏幕" @click="unLockLogin(true)">
+            <lock-outlined />
+            <unlock-outlined />
           </span>
         </div>
         <h6 class="tips">由于您长时间未操作，需重新输入登录密码解锁进入系统。</h6>
       </div>
       <!--      华为充电-->
       <component :is="Math.random() > 0.48 ? 'xiaomi-charge' : 'huawei-charge'" :battery="battery"
-                 :battery-status="batteryStatus" :calc-discharging-time="calcDischargingTime"/>
+                 :battery-status="batteryStatus" :calc-discharging-time="calcDischargingTime" />
       <!--      <xiaomi-charge :battery="battery" />-->
     </template>
     <template v-if="isShowLogin">
       <div class="login-box">
         <a-avatar :size="128">
-          <template v-slot:icon>
-            <user-outlined/>
+          <template #icon>
+            <user-outlined />
           </template>
         </a-avatar>
         <div class="username">{{ loginForm.username }}</div>
@@ -32,8 +32,8 @@
             size="large"
             @search="onLogin"
         >
-          <template v-slot:enterButton>
-            <LoadingOutlined  v-if="loginLoading"/>
+          <template #enterButton>
+            <LoadingOutlined v-if="loginLoading" />
             <arrow-right-outlined v-else />
           </template>
         </a-input-search>
@@ -50,10 +50,10 @@
         </div>
       </div>
       <div class="computer-status">
-      <span :class="{offline: !online}" class="network">
-        <wifi-outlined class="network"/>
-      </span>
-        <api-outlined/>
+        <span :class="{offline: !online}" class="network">
+          <wifi-outlined class="network" />
+        </span>
+        <api-outlined />
       </div>
     </template>
   </div>
@@ -80,11 +80,9 @@ import HuaweiCharge from './huawei-charge.vue'
 import XiaomiCharge from './xiaomi-charge.vue'
 import {useBattery} from '@/hooks/useBattery'
 import {useStore} from "@/store";
-import {LockscreenMutationType} from '@/store/modules/lockscreen/mutations'
-import {UserActionTypes} from '@/store/modules/user/actions'
 
 export default defineComponent({
-  name: "lockscreen",
+  name: "Lockscreen",
   components: {
     LockOutlined,
     LoadingOutlined,
@@ -98,7 +96,7 @@ export default defineComponent({
   },
   setup(props, {emit}) {
     const store = useStore()
-    const isLock = computed(() => store.state.lockscreen.isLock)
+    const isLock = computed(() => store.state["lockscreen/isLock"])
     // 获取本地时间
     const {month, day, hour, minute, second, week} = useTime()
     const {online} = useOnline()
@@ -112,7 +110,7 @@ export default defineComponent({
       isShowLogin: false,
       loginLoading: false, // 正在登录
       loginForm: {
-        username: store.getters.userInfo.username,
+        username: store.getters["user/userInfo"]?.username,
         password: '',
       }
     })
@@ -126,7 +124,7 @@ export default defineComponent({
       const params = {...state.loginForm}
       state.loginLoading = true
       // params.password = md5(params.password)
-      const {code, result, message: msg} = await store.dispatch(UserActionTypes.Login, params).finally(() => {
+      const {code, result, message: msg} = await store.dispatch('user/login', params).finally(() => {
         state.loginLoading = false
         message.destroy()
       })
@@ -134,7 +132,7 @@ export default defineComponent({
         Modal.destroyAll()
         message.success('登录成功！')
         unLockLogin(false)
-        store.commit(LockscreenMutationType.SetLock, false)
+        store.commit('lockscreen/setLock', false)
       } else {
         message.info(msg || '登录失败')
       }
@@ -143,7 +141,7 @@ export default defineComponent({
 
     const nav2login = () => {
       unLockLogin(false)
-      store.commit(LockscreenMutationType.SetLock, false)
+      store.commit('lockscreen/setLock', false)
       router.replace({
         path: '/login',
         query: {

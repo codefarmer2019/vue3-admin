@@ -5,10 +5,10 @@ export type RouteItem = Partial<RouteLocationNormalized> & {
     name: string;
 }
 
-export type State = {
+export type ITabsViewState = {
     tabsList: RouteItem[]; // 标签页
 };
 
-export const state: State = {
+export const state: ITabsViewState = {
     tabsList: [],
 };

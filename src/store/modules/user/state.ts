@@ -2,7 +2,7 @@ import {createStorage} from '@/utils/Storage'
 import {ACCESS_TOKEN, CURRENT_USER} from "@/store/mutation-types";
 const Storage = createStorage({storage: localStorage})
 
-export type State = {
+export type IUserState = {
     token: string;
     name: string;
     welcome: string;
@@ -11,7 +11,7 @@ export type State = {
     info: any;
 };
 
-export const state: State = {
+export const state: IUserState = {
     token: Storage.get(ACCESS_TOKEN, ''),
     name: '',
     welcome: '',

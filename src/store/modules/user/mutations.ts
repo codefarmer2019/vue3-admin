@@ -1,31 +1,16 @@
-import { MutationTree} from 'vuex'
-import { State } from './state'
+import { IUserState } from './state'
 
-export enum MutationType {
-    SetToken = 'SET_TOKEN',
-    SetName = 'SET_NAME',
-    SetAvatar = 'SET_AVATAR',
-    SetRoles = 'SET_ROLES',
-    SetInfo = 'SET_INFO',
-}
-export type Mutations<S = State> = {
-    [MutationType.SetToken](state: S, payload: string): void;
-    [MutationType.SetAvatar](state: S, payload: string): void;
-    [MutationType.SetRoles](state: S, payload: any[]): void;
-    [MutationType.SetInfo](state: S, payload: any): void;
-}
-
-export const mutations: MutationTree<State> & Mutations = {
-    [MutationType.SetToken]: (state, token) => {
+export const mutations = {
+    setToken: (state: IUserState, token: string) => {
         state.token = token
     },
-    [MutationType.SetAvatar]: (state, avatar) => {
+    setAvatar: (state: IUserState, avatar: string) => {
         state.avatar = avatar
     },
-    [MutationType.SetRoles]: (state, roles) => {
+    setRoles: (state: IUserState, roles) => {
         state.roles = roles
     },
-    [MutationType.SetInfo]: (state, info) => {
+    setUserInfo: (state: IUserState, info) => {
         state.info = info
     }
 }

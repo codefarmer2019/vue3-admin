@@ -8,7 +8,7 @@ import {checkStatus} from './checkStatus';
 import {Modal, message as Message} from "ant-design-vue";
 import {RequestEnum, ResultEnum, ContentTypeEnum} from '@/enums/httpEnum';
 
-import {isString} from '@/utils/is/index';
+import {isString} from '@/utils/is/';
 import {setObjToUrlParams} from '@/utils/urlUtils'
 
 import {RequestOptions, Result} from './types';
@@ -19,7 +19,6 @@ import store from '@/store'
 import {storage} from "@/utils/Storage";
 /**
  * @description: 数据处理，方便区分多种处理方式
- * axios封装使用了https://github.com/anncwb/vue-vben-admin/tree/main/src/utils/http/axios
  */
 const transform: AxiosTransform = {
     /**

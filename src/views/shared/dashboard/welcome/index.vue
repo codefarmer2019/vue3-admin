@@ -1,16 +1,16 @@
 <template>
   <div>
     <div class="box">
-      <img src="../../../../assets/analysis.svg">
+      <img src="~@/assets/analysis.svg" />
       <a-descriptions title="系统信息" bordered>
-        <a-descriptions-item label="IP" key="IP">
+        <a-descriptions-item key="IP" label="IP">
           {{ userInfo.IP }}
         </a-descriptions-item>
-        <a-descriptions-item v-for="(value, key) in browserInfo" :label="key" :key="key">
+        <a-descriptions-item v-for="(value, key) in browserInfo" :key="key" :label="key">
           {{ value }}
         </a-descriptions-item>
         <a-descriptions-item label="网络状态">
-          <a-badge :status="online ? 'processing' : 'default'" :text="online ? '在线' : '离线'"/>
+          <a-badge :status="online ? 'processing' : 'default'" :text="online ? '在线' : '离线'" />
         </a-descriptions-item>
       </a-descriptions>
     </div>
@@ -29,7 +29,7 @@ import {useStore} from '@/store'
 // import performanceMonitor from '@/utils/performanceMonitor'
 
 export default defineComponent({
-  name: 'welcome',
+  name: 'Welcome',
   components: {
     HuaweiCharge,
     [Badge.name]: Badge,
@@ -40,7 +40,7 @@ export default defineComponent({
     EllipsisOutlined,
   },
   setup() {
-    const userInfo = useStore().getters.userInfo
+    const userInfo = useStore().getters["user/userInfo"]
     // 是否联网
     const {online} = useOnline()
     // 获取电池信息

@@ -1,11 +1,11 @@
 import {RouteRecordRaw} from 'vue-router'
 
-export type State = {
+export type IAsyncRouteState = {
     menus: RouteRecordRaw[];
     keepAliveComponents: string[];
 };
 
-export const state: State = {
+export const state: IAsyncRouteState = {
     menus: [],
     keepAliveComponents: [],
 };

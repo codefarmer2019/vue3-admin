@@ -3,8 +3,6 @@ import store from '@/store'
 import NProgress from 'nprogress' // progress bar
 import {ACCESS_TOKEN} from '@/store/mutation-types'
 import {storage} from '@/utils/Storage'
-import {AsyncRouteActionTypes} from '@/store/modules/async-route/actions'
-import {MutationType} from '@/store/modules/async-route/mutations'
 import {debounce} from '@/utils/lodashChunk'
 
 NProgress.configure({showSpinner: false}) // NProgress Configuration
@@ -16,7 +14,7 @@ const defaultRoutePath = '/dashboard'
 
 // 是否需要从后端获取菜单
 const isGetMenus = debounce(({to, from, next, hasRoute}) => {
-    store.dispatch(AsyncRouteActionTypes.GenerateRoutes).then(() => {
+    store.dispatch('asyncRoute/generateRoutes').then(() => {
         // 根据roles权限生成可访问的路由表
         // 动态添加可访问路由表
         if (allowList.includes(to.name as string)) return
@@ -87,7 +85,7 @@ export function createRouterGuards(router: Router) {
                 keepAliveComponents.splice(index, 1);
             }
         }
-        store.commit(MutationType.SetKeepAliveComponents, keepAliveComponents)
+        store.commit('asyncRoute/setKeepAliveComponents', keepAliveComponents)
         NProgress.done() // finish progress bar
     })
 

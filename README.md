@@ -6,6 +6,8 @@
 - [后台地址](https://github.com/buqiyuan/nestjs-mysql-api)
 - [vue-cli版](https://github.com/buqiyuan/vue3-antd-admin)
 - [vite踩坑版](https://github.com/buqiyuan/vite-vue3-admin)
+- [gitee地址](https://gitee.com/buqiyuan/vite-vue3-admin)
+
 > 系统模块数据是从后端获取来的真实数据，路由也是从后端动态获取的，而后端是通过内网穿透提供访问的，难免会有访问失败的情况
 > 所以如果进入页面时提示网络错误，则需要再次刷新页面请求接口
 

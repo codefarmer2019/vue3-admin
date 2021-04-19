@@ -95,7 +95,6 @@ import { storage } from "@/utils/Storage";
 import { TABS_ROUTES } from "@/store/mutation-types";
 import store, { useStore } from "@/store";
 import { RouteItem } from "@/store/modules/tabs-view/state";
-import { TabsViewMutationType } from "@/store/modules/tabs-view/mutations";
 
 import { message } from "ant-design-vue";
 
@@ -126,7 +125,7 @@ export default defineComponent({
     }
 
     // 初始化标签页
-    store.commit(TabsViewMutationType.InitTabs, routes);
+    store.commit('tabsView/initTabs', routes);
     // tabsViewMutations.initTabs(routes)
 
     const state = reactive({
@@ -157,7 +156,7 @@ export default defineComponent({
       });
       // 过滤不存在的路由
       if (notFondRoutes.length) {
-        store.commit(TabsViewMutationType.InitTabs, tabsList.value.filter(item => !notFondRoutes.includes(item.name)));
+        store.commit('tabsView/initTabs', tabsList.value.filter(item => !notFondRoutes.includes(item.name)));
       }
     });
 
@@ -167,7 +166,7 @@ export default defineComponent({
       if (whiteList.includes(route.name as string)) return;
       state.activeKey = to;
       // tabsViewMutations.addTabs(getSimpleRoute(route))
-      store.commit(TabsViewMutationType.AddTabs, getSimpleRoute(route));
+      store.commit('tabsView/addTabs', getSimpleRoute(route));
     }, { immediate: true });
 
     // 在页面关闭或刷新之前，保存数据
@@ -182,7 +181,7 @@ export default defineComponent({
       }
       delKeepAliveCompName()
       // tabsViewMutations.closeCurrentTabs(route)
-      store.commit(TabsViewMutationType.CloseCurrentTabs, route);
+      store.commit('tabsView/closeCurrentTab', route);
       // 如果关闭的是当前页
       if (state.activeKey === route.fullPath) {
         const currentRoute = tabsList.value[Math.max(0, tabsList.value.length - 1)];
@@ -215,7 +214,7 @@ export default defineComponent({
     // 关闭左侧
     const closeLeft = (route, index) => {
       // tabsViewMutations.closeLeftTabs(route)
-      store.commit(TabsViewMutationType.CloseLeftTabs, route);
+      store.commit('tabsView/closeLeftTabs', route);
       state.activeKey = route.fullPath;
       router.replace(route.fullPath);
     };
@@ -223,7 +222,7 @@ export default defineComponent({
     // 关闭右侧
     const closeRight = (route, index) => {
       // tabsViewMutations.closeRightTabs(route)
-      store.commit(TabsViewMutationType.CloseRightTabs, route);
+      store.commit('tabsView/closeRightTabs', route);
       state.activeKey = route.fullPath;
       router.replace(route.fullPath);
     };
@@ -231,7 +230,7 @@ export default defineComponent({
     // 关闭其他
     const closeOther = (route) => {
       // tabsViewMutations.closeOtherTabs(route)
-      store.commit(TabsViewMutationType.CloseOtherTabs, route);
+      store.commit('tabsView/closeOtherTabs', route);
       state.activeKey = route.fullPath;
       router.replace(route.fullPath);
     };
@@ -240,7 +239,7 @@ export default defineComponent({
     const closeAll = () => {
       localStorage.removeItem("routes");
       // tabsViewMutations.closeAllTabs()
-      store.commit(TabsViewMutationType.CloseAllTabs);
+      store.commit('tabsView/closeAllTabs');
       router.replace("/");
     };
 

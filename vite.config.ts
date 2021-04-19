@@ -71,15 +71,12 @@ export default ({command, mode}: ConfigEnv): UserConfig => {
         },
         optimizeDeps: {
             include: [
-                'moment',
                 '@ant-design/icons-vue',
-                'lodash',
                 'ant-design-vue/es/locale/zh_CN',
-                'moment/locale/zh-cn',
                 'ant-design-vue/es/locale/en_US',
             ],
             exclude: [
-                // 'ant-design-vue'
+                'vue-demi'
             ]
         },
         build: {

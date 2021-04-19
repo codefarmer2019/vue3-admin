@@ -1,14 +1,14 @@
 <template>
   <ALayoutHeader class="layout-header">
     <div class="left-options">
-      <span @click="() => $emit('update:collapsed', !collapsed)" class="menu-fold">
+      <span class="menu-fold" @click="() => $emit('update:collapsed', !collapsed)">
         <component :is="collapsed ? 'menu-unfold-outlined' : 'menu-fold-outlined'" />
-    </span>
+      </span>
       <a-breadcrumb>
         <template v-for="routeItem in route.matched" :key="routeItem.name">
           <a-breadcrumb-item>
             <a>{{ routeItem.meta.title }}</a>
-            <template v-slot:overlay>
+            <template #overlay>
               <a-menu v-if="routeItem.children.length">
                 <template v-for="childItem in routeItem.children">
                   <a-menu-item v-if="!childItem.meta.hidden" :key="childItem.name">
@@ -29,19 +29,19 @@
           <template #title>
             <span>{{ item.tips }}</span>
           </template>
-          <component v-on="item.eventObject || {}" :is="item.icon" />
+          <component :is="item.icon" v-on="item.eventObject || {}" />
         </a-tooltip>
       </template>
-<!--      切换全屏-->
+      <!--      切换全屏-->
       <component :is="fullscreenIcon" @click="toggleFullScreen" />
       <Dropdown>
         <a-avatar>{{ username }}</a-avatar>
-        <template v-slot:overlay>
+        <template #overlay>
           <a-menu>
             <a-menu-item>
               <a href="javascript:;">个人中心</a>
             </a-menu-item>
-            <a-menu-divider/>
+            <a-menu-divider />
             <a-menu-item>
               <a @click.prevent="doLogout"><poweroff-outlined /> 退出登录</a>
             </a-menu-item>
@@ -60,8 +60,6 @@ import {message, Modal} from 'ant-design-vue'
 import {QuestionCircleOutlined} from '@ant-design/icons-vue'
 import {useStore} from '@/store'
 import {TABS_ROUTES} from "@/store/mutation-types";
-import {LockscreenMutationType} from "@/store/modules/lockscreen/mutations";
-import {UserActionTypes} from "@/store/modules/user/actions";
 
 export default defineComponent({
   name: "PageHeader",
@@ -75,7 +73,7 @@ export default defineComponent({
     const store = useStore()
 
     const state = reactive({
-      username: store.getters.userInfo.username,
+      username: store.getters["user/userInfo"]?.username,
       fullscreenIcon: 'FullscreenOutlined'
     })
 
@@ -92,7 +90,7 @@ export default defineComponent({
         onOk: () => {
           console.log(router, '退出登录')
           // logout({})
-          store.dispatch(UserActionTypes.Logout).then(res => {
+          store.dispatch('user/logout').then(res => {
             message.success('成功退出登录')
             // 移除标签页
             localStorage.removeItem(TABS_ROUTES)
@@ -145,7 +143,7 @@ export default defineComponent({
         icon: 'LockOutlined',
         tips: '锁屏',
         eventObject: {
-          click: () => store.commit(LockscreenMutationType.SetLock, true)
+          click: () => store.commit('lockscreen/setLock', true)
         }
       },
     ]
