@@ -4,7 +4,7 @@ import { ButtonType } from 'ant-design-vue/lib/button/buttonTypes'
 import './styles/index.less'
 
 export default defineComponent({
-  name: 'a-button',
+  name: 'AButton',
   props: {
     type: {
       type: String as PropType<ButtonType | 'warning' | 'success'>,

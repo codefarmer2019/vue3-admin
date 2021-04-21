@@ -1,7 +1,7 @@
 declare module '*.vue' {
-    import {defineComponent} from 'vue'
-    const component: ReturnType<typeof defineComponent>
-    export default component
+  import { defineComponent } from 'vue'
+  const component: ReturnType<typeof defineComponent>
+  export default component
 }
 
 // declare module '*.vue' {
@@ -15,10 +15,10 @@ declare module '*.vue' {
 //     }
 // }
 
-declare type Nullable<T> = T | null;
+declare type Nullable<T> = T | null
 
-declare type CustomizedHTMLElement<T> = HTMLElement & T;
+declare type CustomizedHTMLElement<T> = HTMLElement & T
 
 declare type Indexable<T> = {
-    [key: string]: T;
-};
+  [key: string]: T
+}

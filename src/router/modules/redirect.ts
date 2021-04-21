@@ -1,28 +1,30 @@
-import {RouteRecordRaw} from 'vue-router'
-import {RouterTransition} from '@/components/transition'
-import {markRaw} from "vue";
+import { RouteRecordRaw } from 'vue-router'
+import { RouterTransition } from '@/components/transition'
+import { markRaw } from 'vue'
 
-const routes: Array<RouteRecordRaw> = [{
+const routes: Array<RouteRecordRaw> = [
+  {
     path: '/redirect/:path*',
     name: 'Redirect',
     component: markRaw(RouterTransition),
     meta: {
-        title: '重定向',
-        icon: 'SettingOutlined',
-        hidden: true,
+      title: '重定向',
+      icon: 'SettingOutlined',
+      hidden: true
     },
     children: [
-        {
-            path: '',
-            name: 'Redirect',
-            component: () => import('@/views/shared/redirect/index.vue'),
-            meta: {
-                title: '重定向',
-                hidden: true,
-                keepAlive: false
-            },
+      {
+        path: '',
+        name: 'Redirect',
+        component: () => import('@/views/shared/redirect/index.vue'),
+        meta: {
+          title: '重定向',
+          hidden: true,
+          keepAlive: false
         }
+      }
     ]
-}]
+  }
+]
 
 export default routes

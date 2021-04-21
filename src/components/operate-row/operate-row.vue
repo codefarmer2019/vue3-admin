@@ -18,7 +18,8 @@ import { DeleteOutlined, FormOutlined, PlusOutlined } from '@ant-design/icons-vu
 import { Popconfirm } from 'ant-design-vue'
 
 export default defineComponent({
-  name: 'operate-row',
+  name: 'OperateRow',
+  components: { DeleteOutlined, PlusOutlined, FormOutlined, [Popconfirm.name]: Popconfirm },
   props: {
     hideAdd: {
       type: Boolean,
@@ -34,7 +35,6 @@ export default defineComponent({
     }
   },
   emits: ['delete', 'edit', 'add'],
-  components: { DeleteOutlined, PlusOutlined, FormOutlined, [Popconfirm.name]: Popconfirm },
   setup() {
     return {}
   }

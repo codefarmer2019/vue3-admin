@@ -1,11 +1,11 @@
-import {RouteRecordRaw} from 'vue-router'
+import { RouteRecordRaw } from 'vue-router'
 
 export type IAsyncRouteState = {
-    menus: RouteRecordRaw[];
-    keepAliveComponents: string[];
-};
+  menus: RouteRecordRaw[]
+  keepAliveComponents: string[]
+}
 
 export const state: IAsyncRouteState = {
-    menus: [],
-    keepAliveComponents: [],
-};
+  menus: [],
+  keepAliveComponents: []
+}

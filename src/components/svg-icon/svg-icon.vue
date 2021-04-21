@@ -20,7 +20,7 @@ interface SvgIcon {
 }
 
 export default defineComponent({
-  name: 'svg-icon',
+  name: 'SvgIcon',
   props: {
     iconClass: {
       type: String,

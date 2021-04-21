@@ -1,5 +1,5 @@
 <template>
-  <a-checkbox-group v-model:value="modelValue" v-on="formItem.eventObject" style="width: 100%">
+  <a-checkbox-group v-model:value="modelValue" style="width: 100%" v-on="formItem.eventObject">
     <a-row>
       <template v-for="option in formItem.options" :key="option.value">
         <a-col :span="8">
@@ -17,14 +17,14 @@ import { Checkbox, Row, Col } from 'ant-design-vue'
 import { FormItem } from '@/types/schema'
 
 export default defineComponent({
-  name: 'schema-form-checkbox',
-  emits: ['update:value'],
+  name: 'SchemaFormCheckbox',
   components: {
     [Checkbox.name]: Checkbox,
     [Row.name]: Row,
     [Col.name]: Col,
     [Checkbox.Group.name]: Checkbox.Group
   },
+  emits: ['update:value'],
   props: {
     formItem: {
       // 表单项

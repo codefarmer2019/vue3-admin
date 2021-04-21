@@ -2,8 +2,8 @@
   <a-input
     v-model:value="modelValue"
     v-bind="formItem.props"
-    v-on="formItem.eventObject"
     autocomplete="new-password"
+    v-on="formItem.eventObject"
   />
 </template>
 <script lang="ts">
@@ -12,11 +12,11 @@ import { Input } from 'ant-design-vue'
 import { FormItem } from '@/types/schema'
 
 export default defineComponent({
-  name: 'schema-form-input',
-  emits: ['update:value'],
+  name: 'SchemaFormInput',
   components: {
     [Input.name]: Input
   },
+  emits: ['update:value'],
   props: {
     formItem: {
       // 表单项

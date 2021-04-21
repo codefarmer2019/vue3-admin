@@ -1,7 +1,7 @@
 <template>
   <a-modal
-    v-bind="$attrs"
     v-model:visible="visible"
+    v-bind="$attrs"
     :confirm-loading="confirmLoading"
     :afterClose="remove"
     @ok="onOk"
@@ -17,7 +17,7 @@ import { SchemaForm } from '@/components/JSON-schema-form'
 import { FormSchema } from '@/types/schema'
 
 export default defineComponent({
-  name: 'operate-modal',
+  name: 'OperateModal',
   components: { [Modal.name]: Modal, SchemaForm },
   props: {
     remove: {

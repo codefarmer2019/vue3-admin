@@ -10,7 +10,7 @@ let MyIconFont = createFromIconfontCN({
 })
 
 export default defineComponent({
-  name: 'icon-font',
+  name: 'IconFont',
   props: {
     type: {
       type: String as PropType<string>,

@@ -1,5 +1,5 @@
 <template>
-  <a-select v-model:value="modelValue" v-on="formItem.eventObject" v-bind="formItem.props">
+  <a-select v-model:value="modelValue" v-bind="formItem.props" v-on="formItem.eventObject">
     <template v-for="option in formItem.options" :key="option.value">
       <Option :value="option.value">
         {{ option.label }}
@@ -13,12 +13,12 @@ import { Select } from 'ant-design-vue'
 import { FormItem } from '@/types/schema'
 
 export default defineComponent({
-  name: 'schema-form-select',
-  emits: ['update:value'],
+  name: 'SchemaFormSelect',
   components: {
     [Select.name]: Select,
     [Select.Option.name]: Select.Option
   },
+  emits: ['update:value'],
   props: {
     formItem: {
       // 表单项

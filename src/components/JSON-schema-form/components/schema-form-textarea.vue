@@ -1,5 +1,5 @@
 <template>
-  <a-textarea v-model:value="modelValue" v-on="formItem.eventObject" v-bind="formItem.props" />
+  <a-textarea v-model:value="modelValue" v-bind="formItem.props" v-on="formItem.eventObject" />
 </template>
 <script lang="ts">
 import { defineComponent, PropType, computed } from 'vue'
@@ -7,11 +7,11 @@ import { Input } from 'ant-design-vue'
 import { FormItem } from '@/types/schema'
 
 export default defineComponent({
-  name: 'schema-form-textarea',
-  emits: ['update:value'],
+  name: 'SchemaFormTextarea',
   components: {
     [Input.TextArea.name]: Input.TextArea
   },
+  emits: ['update:value'],
   props: {
     formItem: {
       // 表单项

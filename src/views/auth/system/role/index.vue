@@ -6,19 +6,19 @@
     rowKey="id"
     :row-selection="rowSelection"
   >
-    <template v-slot:title>
+    <template #title>
       <a-button
         v-permission="{ action: 'create', effect: 'disabled' }"
-        @click="addItem"
         type="primary"
+        @click="addItem"
       >
         添加
       </a-button>
       <a-button
-        @click="deleteItems"
         v-permission="{ action: 'delete' }"
         :disabled="isDisabled"
         type="primary"
+        @click="deleteItems"
       >
         删除
       </a-button>
@@ -37,7 +37,7 @@ import { useFormModal } from '@/hooks/useFormModal'
 import { getFormSchema } from './form-schema'
 
 export default defineComponent({
-  name: 'system-role',
+  name: 'SystemRole',
   components: {
     DynamicTable
   },

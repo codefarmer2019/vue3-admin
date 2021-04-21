@@ -1,9 +1,9 @@
-import http from '@/utils/http/axios';
-import {ContentTypeEnum} from "@/enums/httpEnum";
+import http from '@/utils/http/axios'
+import { ContentTypeEnum } from '@/enums/httpEnum'
 
 enum Api {
   sysConfig = '/sys/config',
-  sysSetconfig = '/sys/setconfig',
+  sysSetconfig = '/sys/setconfig'
 }
 
 /**
@@ -13,25 +13,28 @@ export function sysConfig(params) {
   return http.request({
     url: Api.sysConfig,
     method: 'POST',
-    params,
-  });
+    params
+  })
 }
 
 /**
  * @description: 设置系统配置
  */
 export function sysSetconfig(params) {
-  return http.request({
-    url: Api.sysSetconfig,
-    method: 'POST',
-    headers: {
-      // 'Content-type': ContentTypeEnum.TEXT
+  return http.request(
+    {
+      url: Api.sysSetconfig,
+      method: 'POST',
+      headers: {
+        // 'Content-type': ContentTypeEnum.TEXT
+      },
+      params
     },
-    params,
-  }, {
-    isParseToJson: false,
+    {
+      isParseToJson: false,
 
-    successMessageText: '配置成功',
-    errorMessageText: '操作失败'
-  });
+      successMessageText: '配置成功',
+      errorMessageText: '操作失败'
+    }
+  )
 }

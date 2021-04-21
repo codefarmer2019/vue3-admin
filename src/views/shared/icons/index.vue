@@ -7,7 +7,7 @@
       <template v-for="iconItem in icons" :key="iconItem.code">
         <a-card-grid @click="copyIcon(iconItem)">
           <div>
-            <icon-font :type="iconItem.code" size="26"></icon-font>
+            <icon-font :type="iconItem.code" size="26" />
           </div>
           <div>{{ iconItem.title }}</div>
           <div>{{ iconItem.code }}</div>
@@ -27,7 +27,7 @@ import { copyText } from '@/utils/common'
 const prefix = import.meta.env.BASE_URL
 
 export default defineComponent({
-  name: 'icons',
+  name: 'Icons',
   components: { IconFont, [Card.name]: Card, [Card.Grid.name]: Card.Grid },
   setup() {
     const copyIcon = async (iconItem) => {

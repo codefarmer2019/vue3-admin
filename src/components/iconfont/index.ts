@@ -1,2 +1,2 @@
 import IconFont from './icon-font'
-export {IconFont}
+export { IconFont }

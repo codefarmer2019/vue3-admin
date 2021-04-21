@@ -4,7 +4,7 @@
     :type="buttonTypes.includes(type) ? type : 'default'"
     :class="[`ant-btn-${type}`]"
   >
-    <template v-for="(value, key) in $slots" v-slot:[key]="slotProps">
+    <template v-for="(value, key) in $slots" #[key]="slotProps">
       <slot :name="key"></slot>
     </template>
   </antd-button>
@@ -19,7 +19,7 @@ import { ButtonType } from 'ant-design-vue/lib/button/buttonTypes'
 const buttonTypes = ['default', 'primary', 'ghost', 'dashed', 'danger', 'link']
 
 export default defineComponent({
-  name: 'a-button',
+  name: 'AButton',
   components: { 'antd-button': Button }, // 换个名称，避免成死递归组件
   props: {
     type: {

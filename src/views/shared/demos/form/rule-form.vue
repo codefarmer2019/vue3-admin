@@ -10,7 +10,7 @@
     <a-card>
       <schema-form ref="dynamicForm" :form-schema="formSchema">
         <template #operate-button>
-          <a-button @click="confirm" type="primary"> 确定 </a-button>
+          <a-button type="primary" @click="confirm"> 确定 </a-button>
         </template>
       </schema-form>
     </a-card>
@@ -28,7 +28,7 @@ import { getFormSchema } from './form-schema'
  * @description 验证表单
  */
 export default defineComponent({
-  name: 'rule-form',
+  name: 'RuleForm',
   components: { [Alert.name]: Alert, [Card.name]: Card, AButton, SchemaForm },
   setup() {
     const dynamicForm = ref()

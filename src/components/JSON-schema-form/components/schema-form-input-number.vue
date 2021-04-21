@@ -8,11 +8,11 @@ import { InputNumber } from 'ant-design-vue'
 import { FormItem } from '@/types/schema'
 
 export default defineComponent({
-  name: 'schema-form-input-number',
-  emits: ['update:value'],
+  name: 'SchemaFormInputNumber',
   components: {
     [InputNumber.name]: InputNumber
   },
+  emits: ['update:value'],
   props: {
     formItem: {
       // 表单项

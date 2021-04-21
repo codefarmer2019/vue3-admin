@@ -4,7 +4,7 @@
       <div class="left-content">
         <slot name="left-content"> 右边内容区 </slot>
       </div>
-      <div ref="separator" @mousedown="startDrag" class="separator"><i></i><i></i></div>
+      <div ref="separator" class="separator" @mousedown="startDrag"><i></i><i></i></div>
     </div>
     <div class="right-content">
       <slot name="right-content"> 右边内容区 </slot>
@@ -20,7 +20,7 @@ import { throttle } from 'lodash'
 type RefElement = Nullable<HTMLElement>
 
 export default defineComponent({
-  name: 'split-panel',
+  name: 'SplitPanel',
   setup() {
     const scalable = ref<RefElement>(null)
 

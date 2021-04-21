@@ -8,7 +8,7 @@
       style="margin-bottom: 12px"
     />
     <a-card>
-      <a-button @click="visible = true" type="primary">弹出弹窗</a-button>
+      <a-button type="primary" @click="visible = true">弹出弹窗</a-button>
     </a-card>
     <a-custom-modal v-model:visible="visible" />
   </div>
@@ -23,7 +23,7 @@ import { ACustomModal } from '@/components/a-custom-modal'
  * @description 扩展ant-design-vue模态框功能
  */
 export default defineComponent({
-  name: 'custom-modal',
+  name: 'CustomModal',
   components: { [Alert.name]: Alert, [Card.name]: Card, ACustomModal },
   setup() {
     const state = reactive({

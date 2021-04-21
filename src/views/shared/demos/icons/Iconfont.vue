@@ -9,11 +9,11 @@
     />
     <a-card>
       示意图：<img
-        @click="showPreview"
         class="image-demo"
         src="http://ww1.sinaimg.cn/large/005IOlAWgy1gl8bm4ot9dj314r0opabq.jpg"
+        @click="showPreview"
       />
-      <preview-modal v-if="visible" type="image" v-model:visible="visible" :url="imageUrl" />
+      <preview-modal v-if="visible" v-model:visible="visible" type="image" :url="imageUrl" />
       <a-form>
         <a-form-item label="阿里图标路径">
           <a-input
@@ -51,7 +51,7 @@ import PreviewModal from '@/components/preview-modal.vue'
  * @description ant-design-vue配置阿里巴巴矢量图标库使用
  */
 export default defineComponent({
-  name: 'custom-modal',
+  name: 'CustomModal',
   components: { [Alert.name]: Alert, IconFont, PreviewModal },
   setup() {
     const state = reactive({

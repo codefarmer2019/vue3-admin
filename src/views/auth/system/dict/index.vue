@@ -6,9 +6,9 @@
     rowKey="id"
     :row-selection="rowSelection"
   >
-    <template v-slot:title>
-      <a-button @click="addItem" type="primary"> 新增字典 </a-button>
-      <a-button @click="deleteItems" :disabled="isDisabled" type="primary"> 删除 </a-button>
+    <template #title>
+      <a-button type="primary" @click="addItem"> 新增字典 </a-button>
+      <a-button :disabled="isDisabled" type="primary" @click="deleteItems"> 删除 </a-button>
     </template>
   </dynamic-table>
 </template>
@@ -29,7 +29,7 @@ import { hasPermission } from '@/utils/permission/hasPermission'
 import { useFormModal } from '@/hooks/useFormModal/'
 
 export default defineComponent({
-  name: 'system-dict',
+  name: 'SystemDict',
   components: {
     DynamicTable
   },

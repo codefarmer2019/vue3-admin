@@ -13,12 +13,12 @@ import { Radio } from 'ant-design-vue'
 import { FormItem } from '@/types/schema'
 
 export default defineComponent({
-  name: 'schema-form-radio',
-  emits: ['update:value'],
+  name: 'SchemaFormRadio',
   components: {
     [Radio.name]: Radio,
     [Radio.Group.name]: Radio.Group
   },
+  emits: ['update:value'],
   props: {
     formItem: {
       // 表单项

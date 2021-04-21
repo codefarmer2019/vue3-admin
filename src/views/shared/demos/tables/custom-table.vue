@@ -8,7 +8,7 @@
     />
     <a-card>
       <dynamic-table ref="tableRef" :columns="columns" rowKey="id">
-        <template v-slot:title>
+        <template #title>
           <a-button type="primary"> 添加 </a-button>
           <a-button type="primary"> 删除 </a-button>
         </template>
@@ -26,7 +26,7 @@ import { AButton } from '@/components/button'
  * @description 扩展ant-design-vue表格功能
  */
 export default defineComponent({
-  name: 'custom-modal',
+  name: 'CustomModal',
   components: { [Alert.name]: Alert, [Card.name]: Card, AButton }
 })
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <a-switch v-model:checked="modelValue" v-on="formItem.eventObject" v-bind="formItem.props" />
+  <a-switch v-model:checked="modelValue" v-bind="formItem.props" v-on="formItem.eventObject" />
 </template>
 <script lang="ts">
 import { defineComponent, PropType, computed } from 'vue'
@@ -7,11 +7,11 @@ import { Switch } from 'ant-design-vue'
 import { FormItem } from '@/types/schema'
 
 export default defineComponent({
-  name: 'schema-form-textarea',
-  emits: ['update:value'],
+  name: 'SchemaFormTextarea',
   components: {
     [Switch.name]: Switch
   },
+  emits: ['update:value'],
   props: {
     formItem: {
       // 表单项

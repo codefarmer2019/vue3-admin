@@ -1,7 +1,7 @@
 <template>
   <a-modal
-    :title="Number.isInteger(fields.id) ? '编辑资源' : '新增资源'"
     v-model:visible="visible"
+    :title="Number.isInteger(fields.id) ? '编辑资源' : '新增资源'"
     :confirm-loading="confirmLoading"
     :afterClose="remove"
     @ok="handleOk"
@@ -18,10 +18,10 @@
         </a-select>
       </a-form-item>
       <a-form-item
+        v-if="modelRef.type == 1"
         label="模块名称"
         :rules="rules.moduleName"
         name="moduleName"
-        v-if="modelRef.type == 1"
       >
         <a-input
           v-model:value="modelRef.moduleName"
@@ -30,10 +30,10 @@
         />
       </a-form-item>
       <a-form-item
+        v-if="modelRef.type == 2"
         label="模块名称"
         :rules="rules.moduleId"
         name="moduleId"
-        v-if="modelRef.type == 2"
       >
         <a-select
           v-model:value="modelRef.moduleId"
@@ -46,10 +46,10 @@
         </a-select>
       </a-form-item>
       <a-form-item
+        v-if="modelRef.type == 2"
         label="菜单名称"
         :rules="rules.actionName"
         name="actionName"
-        v-if="modelRef.type == 2"
       >
         <a-input v-model:value="modelRef.actionName" placeholder="请输入菜单名称" />
       </a-form-item>
@@ -81,7 +81,7 @@ import { postAdminAccess, getAdminAccessModule, patchAdminAccess } from '@/api/s
 const prefix = import.meta.env.BASE_URL
 
 export default defineComponent({
-  name: 'add-modal',
+  name: 'AddModal',
   components: {
     [Modal.name]: Modal,
     [Form.name]: Form,

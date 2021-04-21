@@ -7,7 +7,7 @@ import styles from './index.module.scss'
 const { Footer: ALayoutFooter } = Layout
 
 export default defineComponent({
-  name: 'page-footer',
+  name: 'PageFooter',
   components: { ALayoutFooter },
   setup() {
     return () => (

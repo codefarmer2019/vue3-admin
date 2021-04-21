@@ -35,7 +35,7 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'xiaomi-charge',
+  name: 'XiaomiCharge',
   props: {
     battery: {
       // 电池对象

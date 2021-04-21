@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: 'index',
+  name: 'Index',
   props: {
     collapsed: {
       type: Boolean

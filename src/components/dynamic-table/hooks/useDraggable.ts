@@ -1,4 +1,4 @@
-import type {TableProps} from 'ant-design-vue/lib/table/interface'
+import type { TableProps } from 'ant-design-vue/lib/table/interface'
 
 /**
  * 表格拖拽
@@ -6,32 +6,32 @@ import type {TableProps} from 'ant-design-vue/lib/table/interface'
  * @returns customRow 行属性方法
  */
 export function useDraggable<T>(dataSource: Array<T>): TableProps['customRow'] {
-    let dragItem: T;
-    let targItem: T;
-    const customRow = (record: T) => {
-        return {
-            draggable: true,
-            ondrag(e: DragEvent) {
-                dragItem = record;
-            },
-            ondrop(e: DragEvent) {
-                targItem = record;
-            },
-            ondragend(e: DragEvent) {
-                if (dragItem !== targItem) {
-                    const dragItemIndex = dataSource.indexOf(dragItem);
-                    const targItemIndex = dataSource.indexOf(targItem);
-                    // 解构交换
-                    [dataSource[dragItemIndex], dataSource[targItemIndex]] = [
-                        dataSource[targItemIndex],
-                        dataSource[dragItemIndex],
-                    ];
-                }
-            },
-            ondragover(e: DragEvent) {
-                return false;
-            },
-        };
-    };
-    return customRow
+  let dragItem: T
+  let targItem: T
+  const customRow = (record: T) => {
+    return {
+      draggable: true,
+      ondrag(e: DragEvent) {
+        dragItem = record
+      },
+      ondrop(e: DragEvent) {
+        targItem = record
+      },
+      ondragend(e: DragEvent) {
+        if (dragItem !== targItem) {
+          const dragItemIndex = dataSource.indexOf(dragItem)
+          const targItemIndex = dataSource.indexOf(targItem)
+          // 解构交换
+          ;[dataSource[dragItemIndex], dataSource[targItemIndex]] = [
+            dataSource[targItemIndex],
+            dataSource[dragItemIndex]
+          ]
+        }
+      },
+      ondragover(e: DragEvent) {
+        return false
+      }
+    }
+  }
+  return customRow
 }

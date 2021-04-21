@@ -1,16 +1,15 @@
 <template>
   <a-spin :spinning="spinning">
     <a-tree
+      v-model:checkedKeys="checkedKeys"
       style="min-height: 40px"
       checkable
       checkStrictly
       :selectable="false"
       :tree-data="treeData"
       :replace-fields="replaceFields"
-      v-model:checkedKeys="checkedKeys"
       @check="onCheck"
-    >
-    </a-tree>
+    />
   </a-spin>
 </template>
 
@@ -20,15 +19,15 @@ import { Tree, Spin } from 'ant-design-vue'
 import { getAdminRoleAccess } from '@/api/system/role'
 
 export default defineComponent({
-  name: 'access-tree',
-  components: { [Tree.name]: Tree, [Spin.name]: Spin },
-  emits: ['update:value'], // 双向数据绑定
+  name: 'AccessTree',
+  components: { [Tree.name]: Tree, [Spin.name]: Spin }, // 双向数据绑定
   props: {
     value: {
       type: Array,
       default: () => []
     }
   },
+  emits: ['update:value'],
   setup(props, { emit }) {
     const state = reactive({
       treeData: [],

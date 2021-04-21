@@ -12,10 +12,10 @@
           v-bind="{ ...formItem.props, ...validateInfos[formItem.field] }"
         >
           <component
+            :is="getComponent(formItem.type)"
             v-model:value="modelRef[formItem.field]"
             :form-item="formItem"
             v-on="{ ...getTriggerEvent(formItem) }"
-            :is="getComponent(formItem.type)"
           />
         </a-form-item>
       </a-spin>
@@ -27,7 +27,7 @@
           offset: formItemLayout.labelCol.span
         }"
       >
-        <slot name="operate-button" />
+        <slot name="operate-button"></slot>
       </a-form-item>
     </template>
   </a-form>
@@ -51,7 +51,7 @@ import components from './components'
 import { FormItem, FormSchema } from '@/types/schema'
 
 export default defineComponent({
-  name: 'dynamic-form',
+  name: 'DynamicForm',
   components: {
     ...components,
     [Spin.name]: Spin,
