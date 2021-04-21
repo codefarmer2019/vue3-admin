@@ -12,7 +12,7 @@
               <a-menu v-if="routeItem.children.length">
                 <template v-for="childItem in routeItem.children">
                   <a-menu-item v-if="!childItem.meta.hidden" :key="childItem.name">
-                    <router-link :to="{name: childItem.name}">
+                    <router-link :to="{ name: childItem.name }">
                       {{ childItem.meta.title }}
                     </router-link>
                   </a-menu-item>
@@ -53,27 +53,27 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, reactive, toRefs, createVNode} from 'vue'
-import {useRouter, useRoute} from 'vue-router'
-import components from "@/layout/header/components";
-import {message, Modal} from 'ant-design-vue'
-import {QuestionCircleOutlined} from '@ant-design/icons-vue'
-import {useStore} from '@/store'
-import {TABS_ROUTES} from "@/store/mutation-types";
+import { defineComponent, reactive, toRefs, createVNode } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+import components from '@/layout/header/components'
+import { message, Modal } from 'ant-design-vue'
+import { QuestionCircleOutlined } from '@ant-design/icons-vue'
+import { useStore } from '@/store'
+import { TABS_ROUTES } from '@/store/mutation-types'
 
 export default defineComponent({
-  name: "PageHeader",
-  components: {...components},
+  name: 'PageHeader',
+  components: { ...components },
   props: {
     collapsed: {
-      type: Boolean,
+      type: Boolean
     }
   },
   setup() {
     const store = useStore()
 
     const state = reactive({
-      username: store.getters["user/userInfo"]?.username,
+      username: store.getters['user/userInfo']?.username,
       fullscreenIcon: 'FullscreenOutlined'
     })
 
@@ -90,34 +90,38 @@ export default defineComponent({
         onOk: () => {
           console.log(router, '退出登录')
           // logout({})
-          store.dispatch('user/logout').then(res => {
+          store.dispatch('user/logout').then((res) => {
             message.success('成功退出登录')
             // 移除标签页
             localStorage.removeItem(TABS_ROUTES)
-            router.replace({
-              name: 'login',
-              query: {
-                redirect: route.fullPath
-              }
-            }).finally(() => location.reload())
+            router
+              .replace({
+                name: 'login',
+                query: {
+                  redirect: route.fullPath
+                }
+              })
+              .finally(() => location.reload())
           })
         }
       })
     }
 
     // 切换全屏图标
-    const toggleFullscreenIcon = () => (state.fullscreenIcon = document.fullscreenElement !== null ? 'FullscreenExitOutlined' : 'FullscreenOutlined')
+    const toggleFullscreenIcon = () =>
+      (state.fullscreenIcon =
+        document.fullscreenElement !== null ? 'FullscreenExitOutlined' : 'FullscreenOutlined')
 
     // 监听全屏切换事件
-    document.addEventListener("fullscreenchange", toggleFullscreenIcon)
+    document.addEventListener('fullscreenchange', toggleFullscreenIcon)
 
     // 全屏切换
     const toggleFullScreen = () => {
       if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen();
+        document.documentElement.requestFullscreen()
       } else {
         if (document.exitFullscreen) {
-          document.exitFullscreen();
+          document.exitFullscreen()
         }
       }
     }
@@ -136,7 +140,7 @@ export default defineComponent({
         }
       },
       {
-        icon:  'SettingOutlined',
+        icon: 'SettingOutlined',
         tips: '网站设置'
       },
       {
@@ -145,7 +149,7 @@ export default defineComponent({
         eventObject: {
           click: () => store.commit('lockscreen/setLock', true)
         }
-      },
+      }
     ]
 
     return {

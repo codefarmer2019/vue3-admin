@@ -11,11 +11,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from "vue";
-import {useStore} from '@/store'
+import { defineComponent, computed } from 'vue'
+import { useStore } from '@/store'
 
 export default defineComponent({
-  name: "RouterTransition",
+  name: 'RouterTransition',
   props: {
     notNeedKey: {
       type: Boolean,
@@ -27,13 +27,13 @@ export default defineComponent({
     }
   },
   setup() {
-    const store = useStore();
+    const store = useStore()
     // 需要缓存的路由组件
     const keepAliveComponents = computed(() => store.state.asyncRoute.keepAliveComponents)
 
     return {
       keepAliveComponents
-    };
+    }
   }
-});
+})
 </script>

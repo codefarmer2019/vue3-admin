@@ -5,15 +5,15 @@
       <h1>OOPS！你好像走丢了...</h1>
       <router-link to="/" class="ant-btn ant-btn-primary">回到首页</router-link>
     </div>
-    <img src="../../../assets/404.gif" alt="">
+    <img src="../../../assets/404.gif" alt="" />
   </div>
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue'
-import {routes} from "@/router";
+import { defineComponent } from 'vue'
+import { routes } from '@/router'
 export default defineComponent({
-  name: "404",
+  name: '404'
 })
 </script>
 

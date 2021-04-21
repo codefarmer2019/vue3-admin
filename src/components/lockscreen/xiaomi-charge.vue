@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div v-for="i in 3" :key="i" class="outer">
-      <div class="circle" :style="{transform: `scale(${1.01 - 0.04 * (i - 1)})`}"></div>
+      <div class="circle" :style="{ transform: `scale(${1.01 - 0.04 * (i - 1)})` }"></div>
     </div>
     <div class="line-box">
       <div class="line-left"></div>
@@ -12,11 +12,17 @@
       <div class="line-center line-center-right-1"></div>
       <div class="line-center line-center-right-2"></div>
     </div>
-    <div class="outer" style="transform: scale(.68);">
-      <div class="circle circle-blur" style="padding: 30px;"></div>
+    <div class="outer" style="transform: scale(0.68)">
+      <div class="circle circle-blur" style="padding: 30px"></div>
     </div>
     <div v-for="i in 4" :key="i" class="outer">
-      <div class="circle-white" :style="{transform: `scale(${1 - 0.02 * (i - 1)})`, 'animation-duration': `${500 - 20 * (i - 1)}ms`}"></div>
+      <div
+        class="circle-white"
+        :style="{
+          transform: `scale(${1 - 0.02 * (i - 1)})`,
+          'animation-duration': `${500 - 20 * (i - 1)}ms`
+        }"
+      ></div>
     </div>
     <div class="outer">
       <div class="text">{{ battery.level }}<span class="sub">%</span></div>
@@ -26,15 +32,16 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: "xiaomi-charge",
+  name: 'xiaomi-charge',
   props: {
-    battery: { // 电池对象
+    battery: {
+      // 电池对象
       type: Object,
       default: () => ({})
-    },
+    }
   }
 })
 </script>
@@ -88,8 +95,8 @@ export default defineComponent({
   width: 220px;
   height: 220px;
   border-radius: 50%;
-  border-top: solid 1px rgba(255, 255, 255, .06);
-  border-bottom: solid 1px rgba(255, 255, 255, .08);
+  border-top: solid 1px rgba(255, 255, 255, 0.06);
+  border-bottom: solid 1px rgba(255, 255, 255, 0.08);
   animation: rotate 500ms linear infinite;
 }
 
@@ -134,7 +141,7 @@ export default defineComponent({
   border-top-right-radius: 50px;
   content: '';
   transform-origin: center top;
-  transform: scaleY(.96);
+  transform: scaleY(0.96);
 }
 
 .line-left::after {
@@ -149,7 +156,7 @@ export default defineComponent({
   border-top-right-radius: 60px;
   content: '';
   transform-origin: center top;
-  transform: scaleY(.92);
+  transform: scaleY(0.92);
 }
 
 .line-right {
@@ -245,15 +252,15 @@ export default defineComponent({
 
 @keyframes light {
   0% {
-    transform: scale(.3);
-    opacity: .3;
+    transform: scale(0.3);
+    opacity: 0.3;
   }
   40% {
     transform: scale(1);
-    opacity: .6;
+    opacity: 0.6;
   }
   100% {
-    transform: scale(.3);
+    transform: scale(0.3);
     opacity: 0;
   }
 }

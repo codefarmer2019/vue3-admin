@@ -11,8 +11,8 @@ const wsAxios = new WsAxios({
     source: 'h5',
     userid: sessionStorage.getItem('yzkf_userid'),
     ts: new Date().getTime(),
-    data: { upcmd: 'ping' },
-  }),
+    data: { upcmd: 'ping' }
+  })
 })
 // websocket请求拦截
 wsAxios.intercepts.request((params) => {

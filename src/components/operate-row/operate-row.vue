@@ -2,26 +2,23 @@
   <div class="actions">
     <slot name="before"></slot>
     <template v-if="!hideDel">
-      <a-popconfirm
-          title="您确定要删除该节点吗?"
-          @confirm="() => $emit('delete')"
-      >
-        <delete-outlined @click.stop/>
+      <a-popconfirm title="您确定要删除该节点吗?" @confirm="() => $emit('delete')">
+        <delete-outlined @click.stop />
       </a-popconfirm>
     </template>
-    <form-outlined v-if="!hideEdit" @click="$emit('edit')"/>
-    <plus-outlined v-if="!hideAdd" @click="$emit('add')"/>
+    <form-outlined v-if="!hideEdit" @click="$emit('edit')" />
+    <plus-outlined v-if="!hideAdd" @click="$emit('add')" />
     <slot name="after"></slot>
   </div>
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue'
-import {DeleteOutlined, FormOutlined, PlusOutlined} from "@ant-design/icons-vue";
-import {Popconfirm} from 'ant-design-vue'
+import { defineComponent } from 'vue'
+import { DeleteOutlined, FormOutlined, PlusOutlined } from '@ant-design/icons-vue'
+import { Popconfirm } from 'ant-design-vue'
 
 export default defineComponent({
-  name: "operate-row",
+  name: 'operate-row',
   props: {
     hideAdd: {
       type: Boolean,
@@ -37,11 +34,9 @@ export default defineComponent({
     }
   },
   emits: ['delete', 'edit', 'add'],
-  components: {DeleteOutlined, PlusOutlined, FormOutlined, [Popconfirm.name]: Popconfirm},
+  components: { DeleteOutlined, PlusOutlined, FormOutlined, [Popconfirm.name]: Popconfirm },
   setup() {
-    return {
-
-    }
+    return {}
   }
 })
 </script>

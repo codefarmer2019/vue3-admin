@@ -15,24 +15,24 @@
           </a-menu-item>
         </template>
         <template v-else>
-          <menu-item :menu-info="item" :key="item.name"/>
+          <menu-item :menu-info="item" :key="item.name" />
         </template>
       </template>
     </a-sub-menu>
     <a-menu-item v-else :key="menuInfo.name">
       <icon-font style="color: aliceblue" :type="menuInfo.meta.icon" />
-      <span>{{menuInfo.meta.title}}</span>
+      <span>{{ menuInfo.meta.title }}</span>
     </a-menu-item>
   </template>
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue'
-import {Menu} from 'ant-design-vue'
-import {IconFont} from '@/components/iconfont'
+import { defineComponent } from 'vue'
+import { Menu } from 'ant-design-vue'
+import { IconFont } from '@/components/iconfont'
 
 export default defineComponent({
-  name: "menu-item",
+  name: 'menu-item',
   components: {
     IconFont,
     'a-sub-menu': Menu.SubMenu,
@@ -41,12 +41,10 @@ export default defineComponent({
   props: {
     menuInfo: {
       type: Object,
-      default: () => ({}),
-    },
-  },
+      default: () => ({})
+    }
+  }
 })
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

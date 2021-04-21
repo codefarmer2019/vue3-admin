@@ -1,13 +1,13 @@
 <template>
   <div class="logo">
-    <img src="../../assets/images/logo.png" alt="">
+    <img src="../../assets/images/logo.png" alt="" />
     <h2 v-show="!collapsed" class="title">One Piece</h2>
   </div>
 </template>
 
 <script>
 export default {
-  name: "index",
+  name: 'index',
   props: {
     collapsed: {
       type: Boolean

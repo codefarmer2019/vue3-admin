@@ -6,7 +6,7 @@ export class WsAxios {
     // 配置
     url: '', // 地址
     time: 3000, // 心跳间隔(毫秒)
-    ping: () => ({}), // ping code,
+    ping: () => ({}) // ping code,
   }
   #ws = null // websocket示例对象
   #requestId = 0 // callbacks对象key
@@ -35,7 +35,7 @@ export class WsAxios {
       } else {
         WsAxios[requestAfter] = (response) => response
       }
-    },
+    }
   }
 
   static [requestBefore](config) {

@@ -7,7 +7,7 @@
           <div v-show="visible" class="ant-modal-mask"></div>
         </transition>
         <transition key="dialog" v-bind="dialogTransitionProps">
-          <div ref="modalWrapRef" v-if="visible" class="ant-modal-wrap" >
+          <div ref="modalWrapRef" v-if="visible" class="ant-modal-wrap">
             <div ref="dragRef" class="ant-modal">
               <div class="ant-modal-content">
                 <div ref="titleRef" class="ant-modal-header">
@@ -29,9 +29,9 @@
                 <div ref="resizeLBRef" class="resizeLB"></div>
                 <div ref="modalBody" class="ant-modal-body">
                   <slot>
-                    ① 窗口可以拖动；<br/>
-                    ② 窗口可以通过八个方向改变大小；<br/>
-                    ③ 窗口可以最小化、最大化、还原、关闭；<br/>
+                    ① 窗口可以拖动；<br />
+                    ② 窗口可以通过八个方向改变大小；<br />
+                    ③ 窗口可以最小化、最大化、还原、关闭；<br />
                     ④ 限制窗口最小宽度/高度。
                   </slot>
                 </div>
@@ -39,7 +39,9 @@
                   <slot name="footer">
                     <div>
                       <a-button @click="closeModal">取 消</a-button>
-                      <a-button @click="closeModal" type="primary" :loading="confirmLoading">确 认</a-button>
+                      <a-button @click="closeModal" type="primary" :loading="confirmLoading"
+                        >确 认</a-button
+                      >
                     </div>
                   </slot>
                 </div>
@@ -53,42 +55,47 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, PropType, SetupContext,} from 'vue'
+import { defineComponent, PropType, SetupContext } from 'vue'
 import { Transition } from 'ant-design-vue/lib/_util/transition'
-import {Modal} from 'ant-design-vue'
-import useModal from "@/components/a-custom-modal/useModal";
+import { Modal } from 'ant-design-vue'
+import useModal from '@/components/a-custom-modal/useModal'
 
 export default defineComponent({
-  name: "a-custom-modal",
+  name: 'a-custom-modal',
   emits: ['update:visible'],
-  components: {Transition},
+  components: { Transition },
   props: {
     title: {
       type: String as PropType<string>,
       default: '标题'
     },
-    visible: { // 弹出显隐
+    visible: {
+      // 弹出显隐
       type: Boolean as PropType<boolean>,
       default: false
     },
-    destroyOnClose: { // 关闭后销毁
+    destroyOnClose: {
+      // 关闭后销毁
       type: Boolean as PropType<boolean>,
       default: false
     },
-    footer: { // 底部内容，当不需要默认底部按钮时，可以设为 :footer="null"	string|slot
+    footer: {
+      // 底部内容，当不需要默认底部按钮时，可以设为 :footer="null"	string|slot
       default: 'I am footer'
     },
-    confirmLoading: { // 确定按钮 loading
+    confirmLoading: {
+      // 确定按钮 loading
       type: Boolean as PropType<boolean>,
       default: false
     },
-    centered: { // 垂直居中展示 Modal
+    centered: {
+      // 垂直居中展示 Modal
       type: Boolean as PropType<boolean>,
       default: false
     }
   },
-  setup(props, ctx: SetupContext ) {
-      return useModal(props, ctx)
+  setup(props, ctx: SetupContext) {
+    return useModal(props, ctx)
   }
 })
 </script>

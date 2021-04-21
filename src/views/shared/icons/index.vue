@@ -18,19 +18,18 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue'
-import {Card, message} from 'ant-design-vue'
-import {IconFont} from '@/components/iconfont'
-import icons from "./icons";
-import {copyText} from '@/utils/common'
+import { defineComponent } from 'vue'
+import { Card, message } from 'ant-design-vue'
+import { IconFont } from '@/components/iconfont'
+import icons from './icons'
+import { copyText } from '@/utils/common'
 
 const prefix = import.meta.env.BASE_URL
 
 export default defineComponent({
-  name: "icons",
-  components: {IconFont, [Card.name]: Card, [Card.Grid.name]: Card.Grid},
+  name: 'icons',
+  components: { IconFont, [Card.name]: Card, [Card.Grid.name]: Card.Grid },
   setup() {
-
     const copyIcon = async (iconItem) => {
       await copyText(iconItem.code)
       message.success(iconItem.code + '--复制成功！')

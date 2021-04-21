@@ -1,11 +1,11 @@
 <template>
   <svg :class="svgClass" aria-hidden="true">
-    <use :xlink:href="iconName"/>
+    <use :xlink:href="iconName" />
   </svg>
 </template>
 
 <script lang="ts">
-import {defineComponent, computed} from 'vue'
+import { defineComponent, computed } from 'vue'
 
 // const components = import.meta.globEager('../../assets/icons/*.svg')
 // const modules = {}
@@ -15,8 +15,8 @@ import {defineComponent, computed} from 'vue'
 // })
 
 interface SvgIcon {
-  iconClass: string;
-  className?: string;
+  iconClass: string
+  className?: string
 }
 
 export default defineComponent({
@@ -32,7 +32,6 @@ export default defineComponent({
     }
   },
   setup(props: SvgIcon) {
-
     const iconName = computed(() => `#icon-${props.iconClass}`)
     const svgClass = computed(() => 'svg-icon')
 

@@ -12,9 +12,9 @@
   </a-checkbox-group>
 </template>
 <script lang="ts">
-import {defineComponent, PropType, computed} from 'vue'
-import {Checkbox, Row, Col} from 'ant-design-vue'
-import {FormItem} from "@/types/schema";
+import { defineComponent, PropType, computed } from 'vue'
+import { Checkbox, Row, Col } from 'ant-design-vue'
+import { FormItem } from '@/types/schema'
 
 export default defineComponent({
   name: 'schema-form-checkbox',
@@ -23,17 +23,17 @@ export default defineComponent({
     [Checkbox.name]: Checkbox,
     [Row.name]: Row,
     [Col.name]: Col,
-    [Checkbox.Group.name]: Checkbox.Group,
+    [Checkbox.Group.name]: Checkbox.Group
   },
   props: {
-    formItem: { // 表单项
+    formItem: {
+      // 表单项
       type: Object as PropType<FormItem>,
       default: () => ({})
     },
     value: undefined as any // 表单项值
   },
-  setup(props, {attrs, emit}) {
-
+  setup(props, { attrs, emit }) {
     const modelValue = computed({
       get: () => props.value,
       set: (val) => emit('update:value', val)
