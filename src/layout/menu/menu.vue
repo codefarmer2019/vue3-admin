@@ -90,7 +90,11 @@ export default defineComponent({
 
     // 点击菜单
     const clickMenuItem = ({ item, key, keyPath }) => {
-      router.push({ name: key })
+      if (/http(s)?:/.test(key)) {
+        window.open(key)
+      } else {
+        router.push({ name: key })
+      }
     }
 
     return {
