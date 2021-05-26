@@ -67,9 +67,12 @@
     "vite-plugin-style-import": "^0.10.1",
     "vue-eslint-parser": "^7.6.0"
   },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -e $GIT_PARAMS"
+  "lint-staged": {
+    "*.{vue,js,ts,tsx}": "eslint --fix"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-customizable"
     }
   },
   "keywords": [

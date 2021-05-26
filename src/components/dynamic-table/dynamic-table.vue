@@ -114,9 +114,9 @@
 import { defineComponent, reactive, PropType, toRefs } from 'vue'
 import { Card, Select, Table, Popconfirm } from 'ant-design-vue'
 import { TableProps } from 'ant-design-vue/lib/table/interface'
-import { usePagination } from '@/hooks'
+import { usePagination, PageOption } from '@/hooks/usePagination'
 import { useDragRow, useDragCol } from './hooks'
-import { Columns, pageOption, Props } from './types'
+import { Columns } from './types'
 
 export default defineComponent({
   name: 'DynamicTable',
@@ -147,7 +147,7 @@ export default defineComponent({
     },
     pageOption: {
       // 分页参数
-      type: Object as PropType<pageOption>,
+      type: Object as PropType<PageOption>,
       default: () => ({})
     },
     dragColEnable: {
@@ -156,7 +156,8 @@ export default defineComponent({
     },
     dragRowEnable: Boolean as PropType<boolean>
   },
-  setup(props) {
+  emits: ['change'],
+  setup(props, { emit }) {
     const { pageOptions } = usePagination()
 
     Object.assign(pageOptions.value, props.pageOption)
@@ -208,7 +209,7 @@ export default defineComponent({
     }
 
     // 分页改变
-    const paginationChange = (pagination, filters, sorter) => {
+    const paginationChange = (pagination, filters, sorter, { currentDataSource }) => {
       const { field, order } = sorter
       console.log(pagination)
       pageOptions.value = {
@@ -223,6 +224,7 @@ export default defineComponent({
         field,
         order
       })
+      emit('change', pagination, filters, sorter, { currentDataSource })
     }
 
     // dataIndex 可以为 a.b.c

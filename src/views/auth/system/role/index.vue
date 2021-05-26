@@ -5,6 +5,7 @@
     :get-list-func="getAdminRole"
     rowKey="id"
     :row-selection="rowSelection"
+    @change="paginationChange"
   >
     <template #title>
       <a-button
@@ -43,6 +44,10 @@ export default defineComponent({
   },
   setup() {
     const tableRef = ref<any>(null)
+
+    const paginationChange = (pagination, filters, sorter, { currentDataSource }) => {
+      console.log(pagination, filters, sorter, { currentDataSource }, '分页改变了！')
+    }
 
     const state = reactive({
       tableLoading: false,
@@ -94,8 +99,9 @@ export default defineComponent({
       ...toRefs(state),
       columns,
       tableRef,
-      getAdminRole,
       isDisabled,
+      getAdminRole,
+      paginationChange,
       addItem,
       deleteItems
     }
