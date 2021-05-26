@@ -1,4 +1,3 @@
-import { FormSchema } from '@/types/schema'
 
 export const getFormSchema = (dynamicForm): FormSchema => ({
   formItemLayout: {

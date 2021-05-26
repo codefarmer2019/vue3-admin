@@ -4,7 +4,6 @@
 <script lang="ts">
 import { defineComponent, PropType, computed } from 'vue'
 import { Switch } from 'ant-design-vue'
-import { FormItem } from '@/types/schema'
 
 export default defineComponent({
   name: 'SchemaFormTextarea',

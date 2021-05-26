@@ -32,7 +32,6 @@ export function sysSetconfig(params) {
     },
     {
       isParseToJson: false,
-
       successMessageText: '配置成功',
       errorMessageText: '操作失败'
     }

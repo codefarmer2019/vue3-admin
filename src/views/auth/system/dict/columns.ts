@@ -1,5 +1,4 @@
 import { formatDate } from '@/utils/common'
-import { TableColumn } from '@/types/tableColumn'
 import { useFormModal } from '@/hooks/useFormModal'
 import { getFormSchema } from '@/views/auth/system/dict/form-schema'
 import { delAdminDictConfig, patchAdminDictConfig } from '@/api/system/dict'

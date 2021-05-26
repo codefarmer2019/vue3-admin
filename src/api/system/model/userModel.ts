@@ -19,18 +19,14 @@ export interface GetUserInfoByUserIdParams {
  * @description: 登录接口返回值
  */
 export interface LoginResultModel {
-  // 角色值数组
-  // roles: { roleName: string; value: RoleEnum }[];
-  // 用户id
-  userId: string | number
-  // // 用户名
-  // username: string;
-  // token
+  createdAt: string
+  id: number
+  isDel: number
+  isSuper: number
+  platform: null
   token: string
-  // // 真实名字
-  // realName: string;
-  // // 介绍
-  // desc?: string;
+  updatedAt: string
+  username: string
 }
 
 /**

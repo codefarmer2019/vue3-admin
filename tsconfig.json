@@ -25,6 +25,7 @@
     "strictFunctionTypes": false,
     "baseUrl": ".",
     "types": ["vite/client", "node"],
+    "typeRoots": ["./node_modules/@types/", "./types"],
     "plugins": [{ "name": "@vuedx/typescript-plugin-vue" }],
     "paths": {
       "@/*": [
@@ -43,8 +44,8 @@
     "src/**/*.d.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
-    "tests/**/*.ts",
-    "tests/**/*.tsx"
+    "types/**/*.d.ts",
+    "types/**/*.ts"
   ],
   "exclude": [
     "node_modules"

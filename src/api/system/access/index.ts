@@ -1,5 +1,6 @@
 import http from '@/utils/http/axios'
 import { RequestEnum } from '@/enums/httpEnum'
+import { AccessItem, AccessResultModel, ModuleItem } from './AccessModel'
 
 enum Api {
   adminAccess = '/admin/access',
@@ -11,7 +12,7 @@ enum Api {
  * @param params
  */
 export function getAdminAccessModule(params?: object) {
-  return http.request({
+  return http.request<ModuleItem[]>({
     url: Api.adminAccessModule,
     method: RequestEnum.GET,
     params
@@ -23,7 +24,7 @@ export function getAdminAccessModule(params?: object) {
  * @param params
  */
 export function getAdminAccess(params) {
-  return http.request({
+  return http.request<AccessResultModel>({
     url: Api.adminAccess,
     method: RequestEnum.GET,
     params
@@ -70,7 +71,7 @@ export function patchAdminAccess(id, params) {
  * @param params
  */
 export function postAdminAccess(params) {
-  return http.request(
+  return http.request<AccessItem>(
     {
       url: Api.adminAccess,
       method: RequestEnum.POST,

@@ -1,6 +1,5 @@
 import { delAdminRole, patchAdminRole } from '@/api/system/role'
 import { formatDate } from '@/utils/common'
-import { TableColumn } from '@/types/tableColumn'
 import { useFormModal } from '@/hooks/useFormModal'
 import { getFormSchema } from './form-schema'
 

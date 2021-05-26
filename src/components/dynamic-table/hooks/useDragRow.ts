@@ -1,11 +1,11 @@
 import type { TableProps } from 'ant-design-vue/lib/table/interface'
 
 /**
- * 表格拖拽
+ * 表格行拖拽
  * @param dataSource table数据集合
  * @returns customRow 行属性方法
  */
-export function useDraggable<T>(dataSource: Array<T>): TableProps['customRow'] {
+export function useDragRow<T>(dataSource: Array<T>): TableProps['customRow'] {
   let dragItem: T
   let targItem: T
   const customRow = (record: T) => {

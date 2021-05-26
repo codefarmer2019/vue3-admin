@@ -1,6 +1,5 @@
 import { delAdminAccount, patchAdminAccount } from '@/api/system/account'
 import { formatDate } from '@/utils/common'
-import { TableColumn } from '@/types/tableColumn'
 import { useFormModal } from '@/hooks/useFormModal'
 import { getFormSchema } from './form-schema'
 

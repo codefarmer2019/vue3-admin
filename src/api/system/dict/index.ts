@@ -1,16 +1,17 @@
 import http from '@/utils/http/axios'
 import { RequestEnum } from '@/enums/httpEnum'
+import { DictItemModel, DictListModel } from './DictModel'
 
 enum Api {
   adminDictConfig = '/admin/dict_config'
 }
 
 /**
- * 获取账号管理列表
+ * 获取字典列表
  * @param params
  */
 export function getAdminDictConfig(params) {
-  return http.request({
+  return http.request<DictListModel>({
     url: Api.adminDictConfig,
     method: RequestEnum.GET,
     params
@@ -18,7 +19,7 @@ export function getAdminDictConfig(params) {
 }
 
 /**
- * 删除账号
+ * 删除字典
  * @param params
  */
 export function delAdminDictConfig(id: string) {
@@ -35,7 +36,7 @@ export function delAdminDictConfig(id: string) {
 }
 
 /**
- * 修改账号
+ * 修改字典
  * @param params
  */
 export function patchAdminDictConfig(id, params) {
@@ -53,11 +54,11 @@ export function patchAdminDictConfig(id, params) {
 }
 
 /**
- * 新建账号
+ * 新建字典
  * @param params
  */
 export function postAdminDictConfig(params) {
-  return http.request(
+  return http.request<DictItemModel>(
     {
       url: Api.adminDictConfig,
       method: RequestEnum.POST,

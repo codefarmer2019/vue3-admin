@@ -147,9 +147,8 @@ export default defineComponent({
         const name = router.currentRoute.value.matched.find((item) => item.name == route.name)
           ?.components?.default.name
         if (name) {
-          store.state.asyncRoute.keepAliveComponents = store.state.asyncRoute.keepAliveComponents.filter(
-            (item) => item != name
-          )
+          store.state.asyncRoute.keepAliveComponents =
+            store.state.asyncRoute.keepAliveComponents.filter((item) => item != name)
         }
       }
     }

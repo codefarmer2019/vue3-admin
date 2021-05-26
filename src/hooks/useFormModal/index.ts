@@ -1,7 +1,6 @@
 // create-api.ts
 import { createVNode, render, VNode } from 'vue'
 import FormModal from './form-modal.vue'
-import { FormSchema } from '@/types/schema'
 
 interface ModalInstance {
   remove(): void

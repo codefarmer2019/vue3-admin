@@ -14,7 +14,6 @@
 import { defineComponent, reactive, toRefs, ref, PropType } from 'vue'
 import { Modal } from 'ant-design-vue'
 import { SchemaForm } from '@/components/JSON-schema-form'
-import { FormSchema } from '@/types/schema'
 
 export default defineComponent({
   name: 'OperateModal',
@@ -56,9 +55,8 @@ export default defineComponent({
 
     props.hiddenFields.forEach(
       (field) =>
-        (state.dynamicValidateForm.formItem.find(
-          (item) => item.field == field
-        )!.hidden = !!props.fields)
+        (state.dynamicValidateForm.formItem.find((item) => item.field == field)!.hidden =
+          !!props.fields)
     )
 
     const onOk = () => {

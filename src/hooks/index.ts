@@ -1,6 +1,6 @@
 import { useAsync } from './use-async'
-import { usePages } from './use-pages'
+import { usePagination } from './usePagination'
 import { useFormModal } from './useFormModal'
 import { useCreateModal } from './useCreateModal'
 
-export { useAsync, usePages, useFormModal, useCreateModal }
+export { useAsync, usePagination, useFormModal, useCreateModal }

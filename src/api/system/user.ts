@@ -1,10 +1,6 @@
 import http from '@/utils/http/axios'
-import {
-  LoginParams,
-  LoginResultModel,
-  GetUserInfoByUserIdParams,
-  GetUserInfoByUserIdModel
-} from './model/userModel'
+import { BasicResponseModel } from '@/api/BasicResponseModel'
+import { LoginParams, LoginResultModel } from './model/userModel'
 
 enum Api {
   login = '/admin/login',
@@ -30,7 +26,7 @@ export function getUserInfo() {
  * @description: 用户登录
  */
 export function login(params: LoginParams) {
-  return http.request(
+  return http.request<BasicResponseModel<LoginResultModel>>(
     {
       url: Api.login,
       method: 'POST',

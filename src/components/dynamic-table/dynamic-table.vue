@@ -16,7 +16,6 @@
     <template v-for="(value, key) in $slots" #[key]="slotProps">
       <slot :name="key" v-bind="slotProps"></slot>
     </template>
-
     <!--    自定义slots end-->
 
     <!--    是否有自定义显示slots start-->
@@ -115,12 +114,20 @@
 import { defineComponent, reactive, PropType, toRefs } from 'vue'
 import { Card, Select, Table, Popconfirm } from 'ant-design-vue'
 import { TableProps } from 'ant-design-vue/lib/table/interface'
-import { usePages } from '@/hooks'
-import { useDraggable, useDragCol } from './hooks'
+import { usePagination } from '@/hooks'
+import { useDragRow, useDragCol } from './hooks'
 import { Columns, pageOption, Props } from './types'
 
 export default defineComponent({
   name: 'DynamicTable',
+  components: {
+    [Table.name]: Table,
+    [Card.name]: Card,
+    [Select.name]: Select,
+    [Popconfirm.name]: Popconfirm,
+    Option: Select.Option
+  },
+  inheritAttrs: false,
   props: {
     columns: {
       type: Object as PropType<Columns[]>
@@ -140,20 +147,18 @@ export default defineComponent({
       // 分页参数
       type: Object as PropType<pageOption>,
       default: () => ({})
-    }
-  },
-  components: {
-    [Table.name]: Table,
-    [Card.name]: Card,
-    [Select.name]: Select,
-    [Popconfirm.name]: Popconfirm,
-    Option: Select.Option
+    },
+    dragColEnable: {
+      type: Boolean as PropType<boolean>,
+      default: true
+    },
+    dragRowEnable: Boolean as PropType<boolean>
   },
   setup(props: Props, { attrs, emit, slots }) {
-    const { pageOption } = usePages()
+    const { pageOption } = usePagination()
 
     // 开启表格伸缩列
-    useDragCol(props.columns)
+    props.dragColEnable && useDragCol(props.columns)
 
     const state = reactive({
       expandItemRefs: {},
@@ -183,7 +188,8 @@ export default defineComponent({
         total: ~~total
       })
       state.data = data
-      state.customRow = useDraggable<any>(state.data)!
+      // 是否可以拖拽行
+      props.dragRowEnable && (state.customRow = useDragRow<any>(state.data)!)
     }
 
     refreshTableData()

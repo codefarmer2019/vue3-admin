@@ -12,14 +12,18 @@ import { LoadingOutlined } from '@ant-design/icons-vue'
 export const useExpandLoading = async ({ expanded, record, expandItemEl, asyncFunc, params }) => {
   // 如果是第一次展开
   if (expanded && record.children && !Array.isArray(record.children)) {
-    const iconEle = expandItemEl.closest('td').querySelector('.ant-table-row-expand-icon')
-    render(createVNode(LoadingOutlined), iconEle)
-    await nextTick()
-    iconEle.classList.add('loading-icon')
-    return asyncFunc(params).finally(async () => {
-      render(null, iconEle)
+    if (expandItemEl) {
+      const iconEle = expandItemEl.closest('td').querySelector('.ant-table-row-expand-icon')
+      render(createVNode(LoadingOutlined), iconEle)
       await nextTick()
-      iconEle.classList.remove('loading-icon')
-    })
+      iconEle.classList.add('loading-icon')
+      return asyncFunc(params).finally(async () => {
+        render(null, iconEle)
+        await nextTick()
+        iconEle.classList.remove('loading-icon')
+      })
+    } else {
+      return asyncFunc(params)
+    }
   }
 }

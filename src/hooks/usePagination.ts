@@ -15,7 +15,7 @@ export interface PageOption extends Partial<typeof PaginationProps> {
   [key: string]: any
 }
 
-export function usePages(pageOptions?: PageOption) {
+export function usePagination(pageOptions?: PageOption) {
   // 分页配置参数
   const pageOption = ref({
     current: 1,

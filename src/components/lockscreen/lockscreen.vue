@@ -130,12 +130,14 @@ export default defineComponent({
       const params = { ...state.loginForm }
       state.loginLoading = true
       // params.password = md5(params.password)
-      const { code, result, message: msg } = await store
-        .dispatch('user/login', params)
-        .finally(() => {
-          state.loginLoading = false
-          message.destroy()
-        })
+      const {
+        code,
+        result,
+        message: msg
+      } = await store.dispatch('user/login', params).finally(() => {
+        state.loginLoading = false
+        message.destroy()
+      })
       if (code == 0) {
         Modal.destroyAll()
         message.success('登录成功！')
