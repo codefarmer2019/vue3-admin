@@ -6,7 +6,7 @@
     :rowKey="rowKey"
     size="middle"
     :data-source="data"
-    :pagination="pageOption"
+    :pagination="pageOptions"
     bordered
     :customRow="customRow"
     v-bind="{ ...$props, ...$attrs }"
@@ -130,11 +130,13 @@ export default defineComponent({
   inheritAttrs: false,
   props: {
     columns: {
-      type: Object as PropType<Columns[]>
+      type: Object as PropType<Columns[]>,
+      required: true
     },
     getListFunc: {
       // 获取列表数据函数API
-      type: Function
+      type: Function,
+      required: true
     },
     rowSelection: {
       type: Object
@@ -154,8 +156,10 @@ export default defineComponent({
     },
     dragRowEnable: Boolean as PropType<boolean>
   },
-  setup(props: Props, { attrs, emit, slots }) {
-    const { pageOption } = usePagination()
+  setup(props) {
+    const { pageOptions } = usePagination()
+
+    Object.assign(pageOptions.value, props.pageOption)
 
     // 开启表格伸缩列
     props.dragColEnable && useDragCol(props.columns)
@@ -164,7 +168,6 @@ export default defineComponent({
       expandItemRefs: {},
       customRow: () => ({} as TableProps['customRow']),
       data: [], // 表格数据
-      pageOption: Object.assign(pageOption, props.pageOption), // 表格分页
       actions:
         props.columns.find((item) => (item.dataIndex || item.key) == 'action')?.actions || [], // 表格操作（如：编辑、删除的按钮等）
       loading: false // 表格加载
@@ -173,8 +176,8 @@ export default defineComponent({
     // 获取表格数据
     const refreshTableData = async (params = {}) => {
       params = {
-        pageNumber: state.pageOption.current,
-        pageSize: state.pageOption.pageSize,
+        pageNumber: pageOptions.value.current,
+        pageSize: pageOptions.value.pageSize,
         ...props.pageOption,
         ...params
       }
@@ -182,7 +185,7 @@ export default defineComponent({
       const { data, pageNumber, pageSize, total } = await props
         .getListFunc(params)
         .finally(() => (state.loading = false))
-      Object.assign(state.pageOption, {
+      Object.assign(pageOptions.value, {
         current: ~~pageNumber,
         pageSize: ~~pageSize,
         total: ~~total
@@ -200,7 +203,7 @@ export default defineComponent({
       await func({ record, props }, () => setTimeout(() => refreshTableData()))
       // 如果为删除操作,并且删除成功，当前的表格数据条数小于2条,则当前页数减一,即请求前一页
       if (actionType == 'del' && state.data.length < 2) {
-        state.pageOption.current = Math.max(1, state.pageOption.current - 1)
+        pageOptions.value.current = Math.max(1, pageOptions.value.current - 1)
       }
     }
 
@@ -208,8 +211,8 @@ export default defineComponent({
     const paginationChange = (pagination, filters, sorter) => {
       const { field, order } = sorter
       console.log(pagination)
-      state.pageOption = {
-        ...state.pageOption,
+      pageOptions.value = {
+        ...pageOptions.value,
         ...pagination
       }
       refreshTableData({
@@ -231,6 +234,7 @@ export default defineComponent({
 
     return {
       ...toRefs(state),
+      pageOptions,
       buttonProps,
       actionEvent,
       refreshTableData,

@@ -15,9 +15,9 @@ export interface PageOption extends Partial<typeof PaginationProps> {
   [key: string]: any
 }
 
-export function usePagination(pageOptions?: PageOption) {
+export function usePagination(pageOption?: PageOption) {
   // 分页配置参数
-  const pageOption = ref({
+  const pageOptions = ref({
     current: 1,
     pageSize: 10,
     total: 0,
@@ -25,9 +25,9 @@ export function usePagination(pageOptions?: PageOption) {
     showQuickJumper: true,
     showSizeChanger: true, // 显示可改变每页数量
     showTotal: (total) => `共 ${total} 条`, // 显示总数
-    onChange: (current, pageSize) => pageOptions?.pageChange?.(current, pageSize),
-    onShowSizeChange: (current, pageSize) => pageOptions?.pageChange?.(current, pageSize),
-    ...pageOptions
+    onChange: (current, pageSize) => pageOption?.pageChange?.(current, pageSize),
+    onShowSizeChange: (current, pageSize) => pageOption?.pageChange?.(current, pageSize),
+    ...pageOption
   })
 
   // 提供给ant-pagination组件的参数
@@ -37,13 +37,13 @@ export function usePagination(pageOptions?: PageOption) {
 
   // 更新分页配置
   const updatePageOption = (options = {}) => {
-    Object.assign(pageOption.value, options)
+    Object.assign(pageOptions.value, options)
     // Object.keys(options).forEach(key => pageOption.value[key] = options[key])
-    console.log(pageOption.value, '更新分页配置')
+    console.log(pageOptions.value, '更新分页配置')
   }
 
   return {
-    pageOption,
+    pageOptions,
     updatePageOption
   }
 }

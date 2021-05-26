@@ -26,7 +26,6 @@
     "baseUrl": ".",
     "types": ["vite/client", "node"],
     "typeRoots": ["./node_modules/@types/", "./types"],
-    "plugins": [{ "name": "@vuedx/typescript-plugin-vue" }],
     "paths": {
       "@/*": [
         "src/*"
