@@ -21,13 +21,13 @@
     <!--    是否有自定义显示slots start-->
     <template
       v-for="slotItem in columns.filter((item) => item.slots)"
-      :key="slotItem.dataIndex || slotItem.slots.customRender"
-      #[slotItem.slots.customRender]="slotProps"
+      :key="slotItem.dataIndex || slotItem.slots?.customRender"
+      #[slotItem.slots?.customRender]="slotProps"
     >
       <!--        自定义渲染start-->
       <slot
-        v-if="$slots[slotItem.slots.customRender]"
-        :name="slotItem.slots.customRender"
+        v-if="$slots[slotItem.slots?.customRender]"
+        :name="slotItem.slots?.customRender"
         v-bind="slotProps"
       ></slot>
       <!--        自定义渲染end-->
@@ -35,33 +35,27 @@
       <!--     非自定义渲染start -->
       <template v-else>
         <!--        非操作 start-->
-        <template v-if="slotItem.slots.customRender !== 'action'">
+        <template v-if="slotItem.slots?.customRender !== 'action'">
           <!--        使用自定义组件格式化显示start-->
           <template v-if="slotItem.slotsType == 'component'">
-            <component :is="slotItem.slotsFunc(slotProps.record)" />
+            <component :is="slotItem?.slotsFunc?.(slotProps.record)" />
           </template>
           <!--        使用自定义组件格式化显示end-->
           <!--        使用自定义函数格式化显示-->
           <template v-if="slotItem.slotsType == 'format'">
             {{
-              slotItem.slotsFunc(
+              slotItem?.slotsFunc?.(
                 slotProps.record[slotItem.dataIndex || slotItem.key],
                 slotProps.record
               )
             }}
-          </template>
-          <!--        链接用于跳转-->
-          <template v-if="slotItem.slotsType == 'link'">
-            <router-link :to="slotItem.linkPath + slotProps.record[slotItem.linkId]">{{
-              slotProps.text
-            }}</router-link>
           </template>
         </template>
         <!--      非操作 end-->
 
         <!--        操作start-->
         <div
-          v-if="slotItem.slots.customRender == 'action'"
+          v-if="slotItem.slots?.customRender == 'action'"
           :key="slotItem.slots.customRender"
           class="actions"
         >
@@ -119,7 +113,6 @@ import { Card, Select, Table, Popconfirm } from 'ant-design-vue'
 import { TableProps } from 'ant-design-vue/lib/table/interface'
 import { usePagination, PageOption } from '@/hooks/usePagination'
 import { useDragRow, useDragCol } from './hooks'
-import { Columns } from './types'
 
 export default defineComponent({
   name: 'DynamicTable',
@@ -133,7 +126,7 @@ export default defineComponent({
   inheritAttrs: false,
   props: {
     columns: {
-      type: Object as PropType<Columns[]>,
+      type: Object as PropType<TableColumn[]>,
       required: true
     },
     getListFunc: {
@@ -202,7 +195,7 @@ export default defineComponent({
     refreshTableData()
 
     // 操作事件
-    const actionEvent = async (record, func, actionType) => {
+    const actionEvent = async (record, func, actionType = '') => {
       // 将refreshTableData放入宏任务中,等待当前微任务拿到结果进行判断操作，再请求表格数据
       await func({ record, props }, () => setTimeout(() => refreshTableData()))
       // 如果为删除操作,并且删除成功，当前的表格数据条数小于2条,则当前页数减一,即请求前一页

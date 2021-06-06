@@ -21,7 +21,7 @@ declare global {
       customRender: string
     }
     slotsType?: 'format' | 'link' | 'component'
-    slotsFunc?: (val) => any
+    slotsFunc?: (...rest) => any
     actions?: ActionOptions[]
   }
 }
