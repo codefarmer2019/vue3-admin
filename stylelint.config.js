@@ -1,6 +1,6 @@
 module.exports = {
   root: true,
-  plugins: ['stylelint-order'],
+  plugins: ['stylelint-order', 'stylelint-scss'],
   extends: ['stylelint-config-standard', 'stylelint-config-prettier'],
   rules: {
     'selector-pseudo-class-no-unknown': [
@@ -28,7 +28,7 @@ module.exports = {
     'font-family-no-missing-generic-family-keyword': null,
     'declaration-colon-space-after': 'always-single-line',
     'declaration-colon-space-before': 'never',
-    'declaration-block-trailing-semicolon': 'always',
+    'declaration-block-trailing-semicolon': ['always', { ignore: ['single-declaration'] }],
     'rule-empty-line-before': [
       'always',
       {

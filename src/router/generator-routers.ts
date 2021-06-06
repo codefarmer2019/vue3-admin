@@ -47,7 +47,7 @@ const list2tree = (items, parentId = -1, arr = [], pathPrefix = '') => {
               ? []
               : ['create', 'update', 'retrieve', 'delete'].map(
                   (n) =>
-                    `${url
+                    `${path
                       .split('/')
                       .filter((m) => m.trim() != '')
                       .join('.')}.${n}`

@@ -13,7 +13,7 @@ export const routes: Array<RouteRecordRaw> = [
     path: '/',
     name: 'Layout',
     redirect: '/dashboard',
-    component: () => import(/* webpackChunkName: "layout" */ '@/layout/index.vue'),
+    component: () => import('@/layout/index.vue'),
     meta: {
       title: '首页'
     },
@@ -24,7 +24,6 @@ export const routes: Array<RouteRecordRaw> = [
 ]
 
 const router = createRouter({
-  // process.env.BASE_URL
   history: createWebHashHistory(''),
   routes
 })

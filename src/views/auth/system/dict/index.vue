@@ -7,8 +7,21 @@
     :row-selection="rowSelection"
   >
     <template #title>
-      <a-button type="primary" @click="addItem"> 新增字典 </a-button>
-      <a-button :disabled="isDisabled" type="primary" @click="deleteItems"> 删除 </a-button>
+      <a-button
+        type="primary"
+        v-permission="{ action: 'create', effect: 'disabled' }"
+        @click="addItem"
+      >
+        新增字典
+      </a-button>
+      <a-button
+        :disabled="isDisabled"
+        v-permission="{ action: 'delete' }"
+        type="primary"
+        @click="deleteItems"
+      >
+        删除
+      </a-button>
     </template>
   </dynamic-table>
 </template>

@@ -94,7 +94,10 @@
                 @confirm="actionEvent(slotProps.record, action.func, 'del')"
               >
                 <template #title> 您确定要删除吗？ </template>
-                <a-button v-bind="{ ...buttonProps, ...action.props }">
+                <a-button
+                  v-bind="{ ...buttonProps, ...action.props }"
+                  v-permission="action.permission"
+                >
                   {{ action.text }}
                 </a-button>
               </a-popconfirm>

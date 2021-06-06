@@ -1,6 +1,5 @@
 import { RouteRecordRaw } from 'vue-router'
 import { RouterTransition } from '@/components/transition'
-import { markRaw } from 'vue'
 
 const routeName = 'demos'
 
@@ -9,7 +8,7 @@ const routes: Array<RouteRecordRaw> = [
     path: '/demos',
     name: routeName,
     redirect: '/demos/custom-a-custom-modal',
-    component: markRaw(RouterTransition),
+    component: RouterTransition,
     meta: {
       title: 'demo演示',
       icon: 'icon-zhuomian'
@@ -23,10 +22,7 @@ const routes: Array<RouteRecordRaw> = [
           icon: 'icon-zhuomian',
           keepAlive: true
         },
-        component: () =>
-          import(
-            /* webpackChunkName: "demos-custom-a-custom-modal" */ '@/views/shared/demos/custom-modal.vue'
-          )
+        component: () => import('@/views/shared/demos/custom-modal.vue')
       },
       {
         path: 'button',
@@ -36,8 +32,7 @@ const routes: Array<RouteRecordRaw> = [
           icon: 'icon-zhuomian',
           keepAlive: true
         },
-        component: () =>
-          import(/* webpackChunkName: "demos-button" */ '@/views/shared/demos/button.vue')
+        component: () => import('@/views/shared/demos/button.vue')
       },
       {
         path: 'form',
@@ -47,8 +42,7 @@ const routes: Array<RouteRecordRaw> = [
           icon: 'icon-zhuomian',
           keepAlive: true
         },
-        component: () =>
-          import(/* webpackChunkName: "demos-button" */ '@/views/shared/demos/form/rule-form.vue')
+        component: () => import('@/views/shared/demos/form/rule-form.vue')
       },
       {
         path: 'icons',
@@ -58,8 +52,7 @@ const routes: Array<RouteRecordRaw> = [
           icon: 'icon-zhuomian',
           keepAlive: true
         },
-        component: () =>
-          import(/* webpackChunkName: "demos-button" */ '@/views/shared/demos/icons/Iconfont.vue')
+        component: () => import('@/views/shared/demos/icons/Iconfont.vue')
       }
     ]
   }

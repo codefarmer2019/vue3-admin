@@ -1,7 +1,5 @@
-import { markRaw } from 'vue'
 import { RouteRecordRaw } from 'vue-router'
 import { RouterTransition } from '@/components/transition'
-import { h } from 'vue'
 
 const routeName = 'dashboard'
 
@@ -10,7 +8,7 @@ const routes: Array<RouteRecordRaw> = [
     path: '/dashboard',
     name: routeName,
     redirect: '/dashboard/welcome',
-    component: h(markRaw(RouterTransition), { notNeedKey: true }),
+    component: RouterTransition,
     meta: {
       title: '系统看板',
       icon: 'icon-yibiaopan'
@@ -23,10 +21,7 @@ const routes: Array<RouteRecordRaw> = [
           title: '首页',
           icon: 'icon-shouye'
         },
-        component: () =>
-          import(
-            /* webpackChunkName: "dashboard-welcome" */ '@/views/shared/dashboard/welcome/index.vue'
-          )
+        component: () => import('@/views/shared/dashboard/welcome/index.vue')
       }
     ]
   }
