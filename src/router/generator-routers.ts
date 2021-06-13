@@ -16,9 +16,14 @@ const list2tree = (items, parentId = -1, arr = [], pathPrefix = '') => {
     .filter((item) => item.parentId == parentId)
     .map((item: any) => {
       const { icon, id, name, parentId, sort, keepAlive, meta, url } = item
-      let path = url.startsWith('/') ? url : '/' + url
-      path = url.startsWith(pathPrefix) ? path : pathPrefix + path
-      path = [...new Set(path.split('/'))].join('/')
+      let path = ''
+      if (/http(s)?:/.test(url)) {
+        path = url
+      } else {
+        path = url.startsWith('/') ? url : '/' + url
+        path = url.startsWith(pathPrefix) ? path : pathPrefix + path
+        path = [...new Set(path.split('/'))].join('/')
+      }
 
       // 路由对应的组件
       const component =
